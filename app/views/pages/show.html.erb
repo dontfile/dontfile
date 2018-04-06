@@ -1,0 +1,30 @@
+<h1>Dontfile</h1> 
+<h4>Though it's just a dontpad for now...</h4>
+
+<textarea id="content" style="width: 100%; min-height: 400px;" oninput="save()" 
+          data-path="<%= @page.url %>"
+>
+  <%= @page.content %>
+</textarea>
+
+<script>
+function save() {
+  var element = document.getElementById("content");
+  var path = "/" + element.getAttribute("data-path");
+  var value = element.value;
+
+  console.log(path);
+
+  $.ajax({
+      url: path,
+      type: "PATCH",
+      data: {
+        url: path, 
+        content: value 
+      },
+      success: function(resp) { 
+        console.log("foi carai");
+      }
+  })
+}
+</script>
