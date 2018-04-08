@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'jquery-rails'
 
+gem 'rubocop'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
