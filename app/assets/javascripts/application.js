@@ -16,3 +16,19 @@
 //= require jquery3
 //= require jquery_ujs
 //= require_tree .
+
+// This function saves all text modifications
+function saveText() {
+  var element = document.getElementById("text");
+  var path = "/" + element.getAttribute("data-path");
+  var pageText = element.value;
+
+  $.ajax({
+    url: path,
+    type: "PATCH",
+    data: {
+      content: pageText
+    },
+    success: function (resp) { }
+  })
+}
