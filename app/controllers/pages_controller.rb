@@ -4,26 +4,25 @@ class PagesController < ApplicationController
   # GET /page
   # GET /page.json
   def find
-    if(@page.nil?)
+    if @page.nil?
       @page = Page.new(page_params)
       @page.save
     end
 
-    render "show"
+    render 'show'
   end
 
-  def show
-  end
+  def show; end
 
   # PATCH /page
   # PATCH /page.json
   def update
     respond_to do |format|
       if @page.update(page_params)
-        format.html { }
-        format.json { }
-        
-        render "show"
+        format.html {}
+        format.json {}
+
+        render 'show'
       else
         # format.html { render :edit }
         # format.json { render json: @page.errors, status: :unprocessable_entity }
@@ -32,13 +31,14 @@ class PagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_page
-      @page = Page.find_by(url: params[:url])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def page_params
-      params.permit(:content, :url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_page
+    @page = Page.find_by(url: params[:url])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def page_params
+    params.permit(:content, :url)
+  end
 end
