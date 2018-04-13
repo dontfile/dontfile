@@ -34,6 +34,8 @@ gem 'jquery-rails'
 
 gem 'rubocop'
 
+gem 'rails-controller-testing'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
