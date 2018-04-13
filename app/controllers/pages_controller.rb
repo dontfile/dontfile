@@ -22,6 +22,8 @@ class PagesController < ApplicationController
       if @page.update(page_params)
         format.html { }
         format.json { }
+        
+        render "show"
       else
         # format.html { render :edit }
         # format.json { render json: @page.errors, status: :unprocessable_entity }
