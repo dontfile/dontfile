@@ -19,9 +19,10 @@
 
 // This function saves all text modifications
 function saveText() {
-  var element = document.getElementById("text");
-  var path = "/" + element.getAttribute("data-path");
-  var pageText = element.value;
+  var element = $("#text");
+  var path = "/" + element.attr("data-path");
+  var pageText = element.val();
+  console.log(">" + pageText + "<")
 
   $.ajax({
     url: path,
