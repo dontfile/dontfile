@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
-  before_action :set_page, only: [:find, :show, :update]
+  before_action :set_page
 
+  # GET /page
+  # GET /page.json
   def find
     if(@page.nil?)
       @page = Page.new(page_params)
@@ -10,18 +12,12 @@ class PagesController < ApplicationController
     render "show"
   end
 
-
-  # RAILS STUFF
-
-  # GET /pages/1
-  # GET /pages/1.json
   def show
   end
 
-  # PATCH/PUT /pages/1
-  # PATCH/PUT /pages/1.json
+  # PATCH /page
+  # PATCH /page.json
   def update
-    # puts "ENTROU NO LUGAR"
     respond_to do |format|
       if @page.update(page_params)
         format.html { }
