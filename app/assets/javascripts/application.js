@@ -28,7 +28,9 @@ function saveText() {
     url: path,
     type: "PATCH",
     data: {
-      content: pageText
+      page: {
+        content: pageText
+      }
     },
     success: function (resp) { }
   })

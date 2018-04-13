@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   # GET /page.json
   def find
     if @page.nil?
-      @page = Page.new(page_params)
+      @page = Page.new(create_page_params)
       @page.save
     end
 
@@ -18,7 +18,7 @@ class PagesController < ApplicationController
   # PATCH /page.json
   def update
     respond_to do |format|
-      if @page.update(page_params)
+      if @page.update(update_page_params)
         format.html {}
         format.json {}
 
@@ -38,7 +38,11 @@ class PagesController < ApplicationController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def page_params
+  def update_page_params
+    params.require(:page).permit(:content, :url)
+  end
+
+  def create_page_params
     params.permit(:content, :url)
   end
 end

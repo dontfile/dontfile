@@ -48,22 +48,19 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show page' do
-    get page_path(@page)
+    get "/#{@page.url})"
     assert_response :success
   end
 
-  # This test isn't working, and I don't know why =(
-  # test 'should update page' do
-  #   old_content = @page.content
+  test 'should update page' do
+    patch "/#{@page.url}", params: {
+      page: {
+        url: "/#{@page.url}",
+        content: 'New content'
+      }
+    }
+    @page.reload
 
-  #   patch "/#{@page.url}", params: {
-  #     page: {
-  #       url: "/#{@page.url}",
-  #       content: 'New content'
-  #     }
-  #   }
-  #   @page.reload
-
-  #   assert_not_equal old_content, @page.content
-  # end
+    assert_equal @page.content, 'New content'
+  end
 end
