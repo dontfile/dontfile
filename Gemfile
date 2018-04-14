@@ -30,11 +30,14 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Custom gems
 gem 'jquery-rails'
 
 gem 'rubocop'
 
 gem 'rails-controller-testing'
+
+gem 'simplecov', require: false, group: :test
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
