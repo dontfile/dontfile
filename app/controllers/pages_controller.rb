@@ -30,6 +30,12 @@ class PagesController < ApplicationController
     end
   end
 
+  def delete_file
+    @page.file.purge
+
+    redirect_back(fallback_location: 'show')
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -39,8 +45,7 @@ class PagesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def update_page_params
-    # params.require(:page).permit(:content, :url, :file)
-    params.permit(:content, :url, :file)
+    params.require(:page).permit(:content, :url, :file)
   end
 
   def create_page_params

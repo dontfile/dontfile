@@ -34,25 +34,36 @@ function saveText() {
     type: "PATCH",
     data: {
       page: {
-        content: pageText
+      content: pageText
       }
     },
     success: function (resp) {}
   })
 }
 
+// This function saves all file uploads
 function saveFile() {
-  const form = new FormData();
-  form.append('file', $('#file').prop('files')[0]);
+  // Max size: 10mb
+  const MAX_SIZE = 10 * 1000 * 1000;
+  const file = $('#file').prop('files')[0];
 
-  // console.log(form.val())
-  $.ajax({
-    async: true,
-    url: getPagePath(),
-    type: 'PATCH',
-    processData: false, 
-    contentType: false,
-    data: form,
-    success: function (resp) {}
-  }); 
+  if(file.size <=  MAX_SIZE) {
+    const form = new FormData();
+    form.append('page[file]', file);
+  
+    $.ajax({
+      async: true,
+      url: getPagePath(),
+      type: 'PATCH',
+      processData: false, 
+      contentType: false,
+      data: form,
+      success: function (resp) {
+        location.reload();
+      }
+    }); 
+  } else {
+    alert("File is too big. Max size is 10mb")
+    $('#file').val('')
+  }
 }

@@ -8,16 +8,17 @@
 
   <div id="file-area">
     <h2>File</h2>
+    <h4>(Max size: 20mb)</h4>
     <input type="file" id="file" onchange="saveFile()"></input>
     <br>
     <br>
-    <br>
-     <% if @page.file.attached? %>
-       <%= image_tag(@page.file, style: "width: 200px;") %>
-       <br>
-       <a href="<%= rails_blob_url(@page.file) %>" download>Download</a>
-     <% end %>
-  </div>
+    <% if @page.file.attached? %>
+      <img src="https://cdn2.iconfinder.com/data/icons/game-center-mixed-icons/512/note.png" width="50px">
 
-  <%#console%>
+      <div>
+        <a href="<%= rails_blob_url(@page.file) %>" download>Download File</a>
+        <%= button_to "Delete File", {action: :delete_file, url: @page.url} , data: { confirm: "Are you sure?" } %>
+      </div>
+    <% end %>
+  </div>
 </div>
