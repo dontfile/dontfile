@@ -39,10 +39,11 @@ class PagesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def update_page_params
-    params.require(:page).permit(:content, :url)
+    # params.require(:page).permit(:content, :url, :file)
+    params.permit(:content, :url, :file)
   end
 
   def create_page_params
-    params.permit(:content, :url)
+    params.permit(:content, :url, :file)
   end
 end

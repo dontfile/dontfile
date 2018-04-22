@@ -16,22 +16,43 @@
 //= require jquery3
 //= require jquery_ujs
 //= require_tree .
+//= require activestorage
+
+function getPagePath() {
+  const container = $("#container");
+  const pagePath = "/" + container.attr("data-path");
+  
+  return pagePath;
+}
 
 // This function saves all text modifications
 function saveText() {
-  var element = $("#text");
-  var path = "/" + element.attr("data-path");
-  var pageText = element.val();
-  console.log(">" + pageText + "<")
+  const pageText = $("#text").val();
 
   $.ajax({
-    url: path,
+    url: getPagePath(),
     type: "PATCH",
     data: {
       page: {
         content: pageText
       }
     },
-    success: function (resp) { }
+    success: function (resp) {}
   })
+}
+
+function saveFile() {
+  const form = new FormData();
+  form.append('file', $('#file').prop('files')[0]);
+
+  // console.log(form.val())
+  $.ajax({
+    async: true,
+    url: getPagePath(),
+    type: 'PATCH',
+    processData: false, 
+    contentType: false,
+    data: form,
+    success: function (resp) {}
+  }); 
 }

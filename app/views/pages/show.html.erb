@@ -1,4 +1,23 @@
 <h1>Dontfile</h1> 
-<h4>Though it's just a dontpad for now...</h4>
 
-<textarea id="text" oninput="saveText()" data-path="<%= @page.url %>"><%= @page.content %></textarea>
+<div id="container" data-path="<%= @page.url %>">
+  <div id="text-area">
+    <h2>Text</h2>
+    <textarea id="text" oninput="saveText()"><%= @page.content %></textarea>
+  </div>
+
+  <div id="file-area">
+    <h2>File</h2>
+    <input type="file" id="file" onchange="saveFile()"></input>
+    <br>
+    <br>
+    <br>
+     <% if @page.file.attached? %>
+       <%= image_tag(@page.file, style: "width: 200px;") %>
+       <br>
+       <a href="<%= rails_blob_url(@page.file) %>" download>Download</a>
+     <% end %>
+  </div>
+
+  <%#console%>
+</div>
