@@ -1,18 +1,18 @@
-language: ruby
-rvm:
-  - 2.4.1
 env:
   global:
-    - CC_TEST_REPORTER_ID=c74715d6995702f54c0ed541d86f05a15d0c3935e38b5d50ca64e50838e78892
-cache: bundler
+    CC_TEST_REPORTER_ID: c45fcc839a26cf4207ee1407607588daae2bee3e0a119976ac9830b05d682f74
+language: ruby
+sudo: required
+rvm:
+  - 2.4.1
 addons:
   postgresql: 9.6
-before-script:
-  # Code Climate Reporter
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
+cache: bundler
+before_install:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > cc-test-reporter
+  - chmod +x cc-test-reporter
   - ./cc-test-reporter before-build
-
+before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database dontfile_test;' -U postgres
 script:
@@ -20,5 +20,5 @@ script:
   - bundle exec rails db:create
   - bundle exec rails db:migrate RAILS_ENV=test
   - bundle exec rails test
-after-script:
+after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
