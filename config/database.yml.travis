@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: dontfile_test
+  username: postgres
