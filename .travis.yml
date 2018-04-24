@@ -12,10 +12,13 @@ before_install:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > cc-test-reporter
   - chmod +x cc-test-reporter
   - ./cc-test-reporter before-build
+install:
+  - gem install rubocop
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database dontfile_test;' -U postgres
 script:
+  - rubocop
   - bundle install
   - bundle exec rails db:create
   - bundle exec rails db:migrate RAILS_ENV=test
