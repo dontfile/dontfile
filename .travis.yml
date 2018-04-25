@@ -18,7 +18,7 @@ before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database dontfile_test;' -U postgres
 script:
-  - rubocop
+  - bundle exec rubocop
   - bundle install
   - bundle exec rails db:create
   - bundle exec rails db:migrate RAILS_ENV=test
