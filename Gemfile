@@ -40,6 +40,8 @@ gem 'rails-controller-testing'
 gem 'simplecov', require: false, group: :test
 
 gem 'bootsnap'
+
+gem 'webpacker', '~> 3.4'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
