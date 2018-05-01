@@ -1,0 +1,27 @@
+<h1>Dontfile</h1> 
+
+<div id="container" data-path="<%= @page.url %>">
+  <div id="text-area">
+    <h2>Text</h2>
+    <textarea id="text" oninput="saveText()"><%= @page.content %></textarea>
+  </div>
+
+  <h2>File</h2>
+  <div id="file-area">
+    <div>
+      <h4>(Max size: 20mb)</h4>
+      <input type="file" id="file" onchange="saveFile()"></input>
+    </div>
+
+    <div id="attachment">
+      <% if @page.file.attached? %>
+        <img src="https://cdn2.iconfinder.com/data/icons/game-center-mixed-icons/512/note.png">
+
+        <div id="buttons">
+          <a class="button" href="<%= rails_blob_url(@page.file) %>" download>Download File</a>
+          <%= button_to "Delete File", {action: :delete_file, url: @page.url} , class: "button", data: { confirm: "Are you sure?" } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
