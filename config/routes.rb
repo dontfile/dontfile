@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   # resources :pages
 
-  get '/:url', to: 'pages#find', as: :page
-  patch '/:url', to: 'pages#update'
-  post :delete_file, to: 'pages#delete_file'
+  get "/:url", to: "pages#find", as: :page
+  patch "/:url", to: "pages#update"
+  post :delete_file, to: "pages#delete_file"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

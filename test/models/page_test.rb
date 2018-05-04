@@ -1,10 +1,10 @@
-require 'test_helper'
+require "test_helper"
 
 class PageTest < ActiveSupport::TestCase
   def setup
     @page = Page.create(
-      url: 'page_url',
-      content: 'Some text'
+      url: "page_url",
+      content: "Some text"
     )
   end
 
