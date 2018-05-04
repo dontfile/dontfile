@@ -1,45 +1,45 @@
-require 'test_helper'
+require "test_helper"
 
 class PagesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @page = Page.create(
-      url: 'page_url',
-      content: 'Some content'
+      url: "page_url",
+      content: "Some content"
     )
   end
 
-  test 'should route find to existing pages' do
+  test "should route find to existing pages" do
     assert_routing "/#{@page.url}",
-                   controller: 'pages',
-                   action: 'find',
+                   controller: "pages",
+                   action: "find",
                    url: @page.url
   end
 
-  test 'should route find to new pages' do
-    assert_routing '/new_page',
-                   controller: 'pages',
-                   action: 'find',
-                   url: 'new_page'
+  test "should route find to new pages" do
+    assert_routing "/new_page",
+                   controller: "pages",
+                   action: "find",
+                   url: "new_page"
   end
 
-  test 'should route update action' do
+  test "should route update action" do
     assert_routing(
       {
-        method: 'patch',
+        method: "patch",
         path: "/#{@page.url}"
       },
-      controller: 'pages',
-      action: 'update',
-      url: @page.url
+      { controller: "pages",
+      action: "update",
+      url: @page.url }
     )
   end
 
-  test 'should create page' do
-    assert_difference('Page.count') do
-      get '/some_page', params: {
+  test "should create page" do
+    assert_difference("Page.count") do
+      get "/some_page", params: {
         page: {
-          content: 'Some content',
-          url: 'some_page'
+          content: "Some content",
+          url: "some_page"
         }
       }
     end
@@ -47,20 +47,20 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_template :show
   end
 
-  test 'should show page' do
+  test "should show page" do
     get "/#{@page.url})"
     assert_response :success
   end
 
-  test 'should update page' do
+  test "should update page" do
     patch "/#{@page.url}", params: {
       page: {
         url: "/#{@page.url}",
-        content: 'New content'
+        content: "New content"
       }
     }
     @page.reload
 
-    assert_equal @page.content, 'New content'
+    assert_equal @page.content, "New content"
   end
 end
