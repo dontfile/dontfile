@@ -12,6 +12,8 @@ class PagesController < ApplicationController
     render 'show'
   end
 
+  def index; end
+
   def show; end
 
   # PATCH /page
