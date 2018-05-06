@@ -9,7 +9,7 @@ class PagesController < ApplicationController
       @page.save
     end
 
-    render 'show'
+    render "show"
   end
 
   def index; end
@@ -24,7 +24,7 @@ class PagesController < ApplicationController
         format.html {}
         format.json {}
 
-        render 'show'
+        render "show"
       else
         # format.html { render :edit }
         # format.json { render json: @page.errors, status: :unprocessable_entity }
@@ -35,22 +35,22 @@ class PagesController < ApplicationController
   def delete_file
     @page.file.purge
 
-    redirect_back(fallback_location: 'show')
+    redirect_back(fallback_location: "show")
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_page
-    @page = Page.find_by(url: params[:url])
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_page
+      @page = Page.find_by(url: params[:url])
+    end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def update_page_params
-    params.require(:page).permit(:content, :url, :file)
-  end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def update_page_params
+      params.require(:page).permit(:content, :url, :file)
+    end
 
-  def create_page_params
-    params.permit(:content, :url, :file)
-  end
+    def create_page_params
+      params.permit(:content, :url, :file)
+    end
 end
