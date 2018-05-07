@@ -44,3 +44,33 @@
     max-height: 50px
   }
 }
+
+.welcome {
+  &-container {
+      margin: 7vw auto 0vw auto;
+      text-align: center;
+  }
+
+  &-title {
+      font-size: 6em;                
+  }
+
+  &-description {
+      font-size: 1.3em;
+      color: darkgray;
+  }
+
+  &-sub-description {
+      margin: 10vw 38vw auto 38vw;
+      font-size: 1.3em;
+      text-align: justify;
+      font-weight: bold;
+  }
+
+  &-router {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-top: 3.5em;
+  }
+}
