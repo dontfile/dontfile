@@ -73,6 +73,5 @@ function goToPage() {
 
   if(pagePath.length > 0) {
     window.location.href = pagePath;
-    console.log()
   }
 }

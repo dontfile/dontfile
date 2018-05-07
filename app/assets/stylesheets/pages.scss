@@ -47,7 +47,7 @@
 
 .welcome {
   &-container {
-    margin: 7vw auto 0vw auto;
+    margin: 5em auto 0vw auto;
     text-align: center;
   }
 
@@ -69,7 +69,7 @@
 
   &-router {
     justify-content: center;
-    margin: 7vw auto auto auto;
+    margin: 5em auto auto auto;
     display: flex;
     font-size: 1.3em;
     text-align: center;
@@ -80,6 +80,22 @@
       width: 100%;
       max-width: 500px;
       margin: 0 3px;
+    }
+  }
+
+  &-footer {
+    margin-top: 14%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+
+    i {
+      font-size: 1.5em;
+    }
+
+    span {
+      margin: auto 4px;
     }
   }
 }
