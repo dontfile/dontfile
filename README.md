@@ -1,12 +1,25 @@
-# Dontfile
-[![Build Status](https://travis-ci.org/MatheusRich/dontfile.svg?branch=master)](https://travis-ci.org/MatheusRich/dontfile)
-[![Maintainability](https://api.codeclimate.com/v1/badges/786863e9b71eab0a50e9/maintainability)](https://codeclimate.com/github/MatheusRich/dontfile/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/786863e9b71eab0a50e9/test_coverage)](https://codeclimate.com/github/MatheusRich/dontfile/test_coverage)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/MatheusRich/dontfile/blob/master/LICENSE)
+<p align="center">
+  <img style="text-align:center;" src="public/dontfile.png" width=150 height=150>
+  <h3 align="center">Dontfile</h3>
+</p>
 
-![](https://i.imgur.com/ODwqvvM.jpg)
-
-The dontpad of files.
+<p align="center">
+  <i>The dontpad of files</i>
+  <br>
+  <br>
+  <a href="https://travis-ci.org/MatheusRich/dontfile">
+    <img src="https://travis-ci.org/MatheusRich/dontfile.svg?branch=master" alt="Build Status">
+  </a>
+  <a href="https://codeclimate.com/github/MatheusRich/dontfile/maintainability">
+    <img src="https://api.codeclimate.com/v1/badges/786863e9b71eab0a50e9/maintainability" alt="Maintainability">
+  </a>
+  <a href="https://codeclimate.com/github/MatheusRich/dontfile/test_coverage">
+    <img src="https://api.codeclimate.com/v1/badges/786863e9b71eab0a50e9/test_coverage" alt="Test Coverage">
+  </a>
+  <a href="https://github.com/MatheusRich/dontfile/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
+  </a>
+</p>
 
 * Ruby version: 2.4.1
 * Rails version: 5.2.0
