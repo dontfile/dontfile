@@ -63,7 +63,16 @@ function saveFile() {
       }
     }); 
   } else {
-    alert("File is too big. Max size is 10mb")
-    $('#file').val('')
+    alert("File is too big. Max size is 10mb");
+    $('#file').val('');
+  }
+}
+
+function goToPage() {
+  let pagePath = $('#input').val();
+
+  if(pagePath.length > 0) {
+    window.location.href = pagePath;
+    console.log()
   }
 }
