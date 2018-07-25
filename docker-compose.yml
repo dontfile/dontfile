@@ -1,15 +1,25 @@
 version: '3'
 services:
   db:
+    container_name: db
     image: postgres:9.6
     # volumes:
     #   - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      - PG_USERNAME=postgres
+      - PG_DATABASE=dontfile_development
+      - PG_HOST=db
+      # - PG_HOST=falko-database
   web:
+    container_name: web
+    command: ["sh", "startup.sh"]
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/dontfile
     ports:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      - PG_HOST=db
+      - PG_USERNAME=postgres
