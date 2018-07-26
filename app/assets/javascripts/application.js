@@ -63,7 +63,7 @@ function saveFile() {
       }
     }); 
   } else {
-    alert("File is too big. Max size is 10mb");
+    alert("File is too big. Max size is 20mb");
     $('#file').val('');
   }
 }
