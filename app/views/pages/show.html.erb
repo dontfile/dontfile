@@ -16,10 +16,15 @@
     <div id="attachment">
       <% if @page.file.attached? %>
         <i class="far fa-file-alt"></i>
+        <p><%= @page.file_blob.filename %></p>
 
         <div id="buttons">
-          <a class="button" href="<%= rails_blob_url(@page.file) %>" download>Download File</a>
-          <%= button_to "Delete File", {action: :delete_file, url: @page.url} , class: "button", data: { confirm: "Are you sure?" } %>
+          <a class="button" href="<%= rails_blob_url(@page.file) %>" download>
+            <i class="far fa-arrow-alt-circle-down"></i>
+          </a>
+          <%= button_to action: :delete_file, url: @page.url , data: { confirm: "Are you sure?" } do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
         </div>
       <% end %>
     </div>

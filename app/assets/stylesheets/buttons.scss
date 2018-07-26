@@ -24,3 +24,9 @@
 .button:hover {
   border-color: #777;
 }
+
+// TODO remove this and use the .button class
+button {
+  padding: .3em;
+  cursor: pointer;
+}

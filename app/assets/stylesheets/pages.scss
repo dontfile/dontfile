@@ -37,10 +37,19 @@
     margin-top: 20px;
   }
 
+  p {
+    margin-left: 5px;
+    overflow-wrap: break-word;
+    max-width: 230px;
+  }
+
   i {
-    font-size: 4em;
+    font-size: 25px;
     height: auto; 
     width: auto; 
+  }
+  .fa-file-alt {
+    font-size: 4em;
   }
   img {
     height: auto; 
