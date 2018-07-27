@@ -1,3 +1,5 @@
+<% title @page.url %>
+
 <h1>Dontfile</h1> 
 
 <div id="container" data-path="<%= @page.url %>">
@@ -22,6 +24,7 @@
           <a class="button" href="<%= rails_blob_url(@page.file) %>" download>
             <i class="far fa-arrow-alt-circle-down"></i>
           </a>
+          
           <%= button_to action: :delete_file, url: @page.url , data: { confirm: "Are you sure?" } do %>
             <i class="fas fa-trash-alt"></i>
           <% end %>
