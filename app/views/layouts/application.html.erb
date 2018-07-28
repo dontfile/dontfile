@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dontfile</title>
+    <title>Dontfile<%= content_for?(:title) ? ' | ' + yield(:title) : ''%></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
 
