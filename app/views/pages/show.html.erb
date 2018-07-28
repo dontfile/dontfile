@@ -17,16 +17,16 @@
 
     <div id="attachment">
       <% if @page.file.attached? %>
-        <i class="far fa-file-alt"></i>
+        <%= icon('far', 'file-alt') %>
         <p><%= @page.file_blob.filename %></p>
 
         <div id="buttons">
-          <a class="button" href="<%= rails_blob_url(@page.file) %>" download>
-            <i class="far fa-arrow-alt-circle-down"></i>
+          <a class="button" title='Download File' href="<%= rails_blob_url(@page.file) %>" download>
+            <%= icon('far', 'arrow-alt-circle-down') %>
           </a>
           
-          <%= button_to action: :delete_file, url: @page.url , data: { confirm: "Are you sure?" } do %>
-            <i class="fas fa-trash-alt"></i>
+          <%= button_to delete_file_path, method: :delete, params: { url: @page.url }, title: 'Delete File', data: { confirm: "Are you sure?" } do %>
+            <%= icon('far', 'trash-alt') %>
           <% end %>
         </div>
       <% end %>
