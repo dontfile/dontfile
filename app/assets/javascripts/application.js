@@ -33,17 +33,22 @@ function saveText() {
     type: "PATCH",
     data: {
       page: {
-      content: pageText
+        content: pageText
       }
     },
     success: function (resp) {}
   })
 }
 
+function displayErrorMessage() {
+  alert("File is too big. Max size is 20mb.");
+  $('#file').val('');
+}
+
 // This function saves all file uploads
 function saveFile() {
-  // Max size: 10mb
-  const MAX_SIZE = 10 * 1000 * 1000;
+  // Max size: 20mb
+  const MAX_SIZE = 20 * 1000 * 1000;
   const file = $('#file').prop('files')[0];
 
   if(file.size <=  MAX_SIZE) {
@@ -59,11 +64,13 @@ function saveFile() {
       data: form,
       success: function (resp) {
         location.reload();
+      },
+      error: function (e) {
+        displayErrorMessage();
       }
     }); 
   } else {
-    alert("File is too big. Max size is 20mb");
-    $('#file').val('');
+    displayErrorMessage();
   }
 }
 
