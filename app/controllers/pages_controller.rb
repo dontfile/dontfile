@@ -26,8 +26,8 @@ class PagesController < ApplicationController
 
         render "show"
       else
-        # format.html { render :edit }
-        # format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.html { render "show", status: :not_acceptable }
+        format.json { render json: @page.errors, status: :not_acceptable }
       end
     end
   end
