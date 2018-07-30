@@ -63,4 +63,51 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal @page.content, "New content"
   end
+
+  test "should upload file" do
+    refute @page.file.attached?
+    patch "/#{@page.url}", params: {
+      page: {
+        url: "/#{@page.url}",
+        file: fixture_file_upload("public/dontfile.png", "image/png")
+      }
+    }
+    @page.reload
+
+    assert @page.file.attached?
+  end
+
+  # test "should not upload file bigger than max size allowed" do
+  #   refute @page.file.attached?
+
+  #   patch "/#{@page.url}", params: {
+  #     page: {
+  #       url: "/#{@page.url}",
+  #       file: my_stub_file_with_big_size
+  #     }
+  #   }
+  #   assert_response :not_acceptable
+  #   @page.reload
+
+  #   refute @page.file.attached?
+  # end
+
+  test "should delete file" do
+    @page.file.attach(
+      io: File.open("public/dontfile.png"),
+      filename: "dontfile.png"
+    )
+    @page.save!
+
+    assert @page.file.attached?
+
+    assert_difference "ActiveStorage::Attachment.count", -1 do
+      delete delete_file_path, params: {
+        url: @page.url
+      }
+    end
+
+    @page.reload
+    refute @page.file.attached?
+  end
 end
