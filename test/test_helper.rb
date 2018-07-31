@@ -14,4 +14,8 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def reset_max_file_size_constant(new_size = 0)
+    Page.send(:remove_const, "MAX_FILE_SIZE")
+    Page.const_set("MAX_FILE_SIZE", new_size)
+  end
 end
