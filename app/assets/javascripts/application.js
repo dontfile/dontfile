@@ -25,9 +25,7 @@ function getPagePath() {
 }
 
 // This function saves all text modifications
-function saveText() {
-  const pageText = $("#text").val();
-
+function saveText(pageText) {
   $.ajax({
     url: getPagePath(),
     type: "PATCH",
@@ -81,3 +79,16 @@ function goToPage() {
     window.location.href = pagePath;
   }
 }
+
+$(() => {
+  let textArea = $('#text');
+  let timeout = null;
+
+  textArea.keyup(() => {
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      saveText(textArea.val());
+    }, 800);
+  });
+});
