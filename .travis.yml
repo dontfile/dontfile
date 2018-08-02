@@ -4,22 +4,31 @@ env:
 language: ruby
 sudo: required
 rvm:
-  - 2.4.1
+- 2.4.1
 addons:
   postgresql: 9.6
 cache: bundler
 before_install:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > cc-test-reporter
-  - chmod +x cc-test-reporter
-  - ./cc-test-reporter before-build
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > cc-test-reporter
+- chmod +x cc-test-reporter
+- "./cc-test-reporter before-build"
 before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database dontfile_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database dontfile_test;' -U postgres
 script:
-  - bundle install
-  - bundle exec rails db:create
-  - bundle exec rails db:migrate RAILS_ENV=test
-  - bundle exec rails test
-  - bundle exec rubocop
+- bundle install
+- bundle exec rails db:create
+- bundle exec rails db:migrate RAILS_ENV=test
+- bundle exec rails test
+- bundle exec rubocop
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+deploy:
+  on:
+    tags: true
+    all_branches: true
+    repo: MatheusRich/dontfile
+  provider: heroku
+  app: dont-file
+  api_key:
+    secure: ikKMRAGrOBcbxBHGK03iJTl5Kv0jNZdzeJVbkeoqRmRVGEk8/WUcBcK6pd80jA6rXteh+dKa/OXjt8gM5nsx2RTFUzJpBly8/C2/PWg9ANlV4Gpos5Vwr6iTPHzGTj7lUhtbWhVTkRPZnB3QCucSN2Ifq/ZcxOU9ntSEuwxvWcwfdYJfMJRe3OHmP3ZtW4qSwO2b3HjHqyJxbe2wGUb2iSeou9LpUx2PdNX1Qw0Z8CXlv6w388yCTMmen162Rx423AxZU8ajkRhada24TlKfdnPICWWIEg9FBLcNZNIvy184Bdrd/hq7DArCNZJhsIbXuIKJlqQVF4scDfNQCS0IIkghekJzjcXv6b0TIrl0zVR7yk+6PMO2cR2F+WGoPlV0kmgkE5Yy820Kmv4KSJ+LaJO2qCjErZ74LKZxhT4v/Py6Gn2rwFF7Xrv9kCMjIjAcneNKfveJNNz3wBfTcq8fBKK1DkgcxfjVjIRgiC4u3r84KAoUsXNXArBJoxlytgxdLOY8gsLuB8WfKfn5D7dZeA5NuN6tE4uWJ6zsCVcAg2ag4Zul4Rn3SPm8hYg2kPCrvoYP/AY2IJKMkDr7vqJhAWzo/hUwWLHSwWzL/uBbntvG8BsGlp5TyUnV0jqX74VJaGWTPUAJzAQC3IN0IWIPBzy585rp4v5k+CL+6cMhi7Q=
