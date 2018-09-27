@@ -106,6 +106,7 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.4)
     multi_json (1.13.1)
+    newrelic_rpm (5.4.0.347)
     nio4r (2.3.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
@@ -237,6 +238,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
+  newrelic_rpm
   pg (>= 0.18, < 2.0)
   puma (~> 3.7)
   rails (~> 5.2.0)
@@ -257,4 +259,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.16.2
+   1.16.3

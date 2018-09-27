@@ -44,6 +44,9 @@ gem "bootsnap"
 gem "font-awesome-sass", "~> 5.2.0"
 
 gem "webpacker", "~> 3.4"
+
+gem "newrelic_rpm"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

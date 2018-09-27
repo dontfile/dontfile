@@ -9,7 +9,8 @@ addons:
   postgresql: 9.6
 cache: bundler
 before_install:
-- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > cc-test-reporter
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > cc-test-reporter
 - chmod +x cc-test-reporter
 - "./cc-test-reporter before-build"
 before_script:
@@ -31,4 +32,4 @@ deploy:
   provider: heroku
   app: dont-file
   api_key:
-    secure: ikKMRAGrOBcbxBHGK03iJTl5Kv0jNZdzeJVbkeoqRmRVGEk8/WUcBcK6pd80jA6rXteh+dKa/OXjt8gM5nsx2RTFUzJpBly8/C2/PWg9ANlV4Gpos5Vwr6iTPHzGTj7lUhtbWhVTkRPZnB3QCucSN2Ifq/ZcxOU9ntSEuwxvWcwfdYJfMJRe3OHmP3ZtW4qSwO2b3HjHqyJxbe2wGUb2iSeou9LpUx2PdNX1Qw0Z8CXlv6w388yCTMmen162Rx423AxZU8ajkRhada24TlKfdnPICWWIEg9FBLcNZNIvy184Bdrd/hq7DArCNZJhsIbXuIKJlqQVF4scDfNQCS0IIkghekJzjcXv6b0TIrl0zVR7yk+6PMO2cR2F+WGoPlV0kmgkE5Yy820Kmv4KSJ+LaJO2qCjErZ74LKZxhT4v/Py6Gn2rwFF7Xrv9kCMjIjAcneNKfveJNNz3wBfTcq8fBKK1DkgcxfjVjIRgiC4u3r84KAoUsXNXArBJoxlytgxdLOY8gsLuB8WfKfn5D7dZeA5NuN6tE4uWJ6zsCVcAg2ag4Zul4Rn3SPm8hYg2kPCrvoYP/AY2IJKMkDr7vqJhAWzo/hUwWLHSwWzL/uBbntvG8BsGlp5TyUnV0jqX74VJaGWTPUAJzAQC3IN0IWIPBzy585rp4v5k+CL+6cMhi7Q=
+    secure: AkRpf28cnWY1a3vXPwRSJmvcgJxW7HOJNUq5wxAsNR1lquAPT3EVC7s5GB3tcy68xheFEFXMUptmgljFZCO5wh+RcsBEVrGBF7Govqcp/+1gd0odgB4kt4ypXXyX9O0uSumFzmcr0MD0i3oFe6Co78Wc9+6no/Qo7C+Myw7HXZytUr8WJNOoOKP3YU5AtAa7XRMVzNAOBrSO8Wu37IVwf+t2cK1pemgvy5ATgITi9ViNH7ja8gKYUflRtGDuzfiTD1MFoYScP0BwrVZVZ42HLOO02Yivc1tqc0jDa6eii8La/+kuikajPPrY8YWlocqHMUtL9rHM6MpvLFylSdo+gAFFYVtmLK3lBZLd+Q5HUpttupWlz4ar8xNzMb6dFWD4SfR3MMvOnZVWye8WHDhvGVJ0Cwt0cFevQT+PDn8+ohBDwuodbvIfbwQLa+F5eCTcq/N3yuEuL5pZelX2OvHUMiyR++UY0bj27+0ZO+06mk598q7NAylu7M3XR3/cQxHMVqMrajtjn3ak/MKICjKXW01H9BV3mtPIE782oK4021VH6Z/LCMwo4Yte5sw024Eh4sIC4ibCztv+wRPYF0pV58gDkNrFShxA5MC2rFw7kMleLD7bW+/oS8Kjrg7QNrLoyt36c1K51fmTD/aFCkmbfOphs77EV2F+hLML2lVmums=
