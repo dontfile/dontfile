@@ -52,6 +52,7 @@ function saveFile() {
   if(file.size <=  MAX_SIZE) {
     const form = new FormData();
     form.append('page[file]', file);
+    const progressBar = $('#file-upload-progress');
 
     $.ajax({
       async: true,
@@ -61,12 +62,15 @@ function saveFile() {
       cache: false,
       contentType: false,
       data: form,
+      beforeSend: function () {
+        progressBar.addClass('active');
+      },
       xhr: function () {
         var newXhr = $.ajaxSettings.xhr();
         if(newXhr.upload) {
           newXhr.upload.addEventListener('progress', function (e) {
             if (e.lengthComputable) {
-              $('#file-upload-progress').attr({
+              progressBar.attr({
                 value: e.loaded,
                 max: e.total
               });
@@ -80,6 +84,9 @@ function saveFile() {
       },
       error: function (e) {
         displayErrorMessage();
+      },
+      complete: function () {
+        progressBar.removeClass('active');
       }
     });
   } else {

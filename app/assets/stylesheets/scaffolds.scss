@@ -68,3 +68,11 @@ div {
 label {
   display: block;
 }
+
+progress {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
