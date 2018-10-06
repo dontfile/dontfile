@@ -20,7 +20,7 @@
 function getPagePath() {
   const container = $("#container");
   const pagePath = "/" + container.attr("data-path");
-  
+
   return pagePath;
 }
 
@@ -52,21 +52,36 @@ function saveFile() {
   if(file.size <=  MAX_SIZE) {
     const form = new FormData();
     form.append('page[file]', file);
-  
+
     $.ajax({
       async: true,
       url: getPagePath(),
       type: 'PATCH',
-      processData: false, 
+      processData: false,
+      cache: false,
       contentType: false,
       data: form,
+      xhr: function () {
+        var newXhr = $.ajaxSettings.xhr();
+        if(newXhr.upload) {
+          newXhr.upload.addEventListener('progress', function (e) {
+            if (e.lengthComputable) {
+              $('#file-upload-progress').attr({
+                value: e.loaded,
+                max: e.total
+              });
+            }
+          }, false);
+        }
+        return newXhr;
+      },
       success: function (resp) {
         location.reload();
       },
       error: function (e) {
         displayErrorMessage();
       }
-    }); 
+    });
   } else {
     displayErrorMessage();
   }
