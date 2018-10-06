@@ -43,17 +43,30 @@ function displayErrorMessage() {
   $('#file').val('');
 }
 
+function updateProgressBar() {
+  var newXhr = $.ajaxSettings.xhr();
+  if(newXhr.upload) {
+    newXhr.upload.addEventListener('progress', function (e) {
+      if (e.lengthComputable) {
+        $('#file-upload-progress').attr({
+          value: e.loaded,
+          max: e.total
+        });
+      }
+    }, false);
+  }
+  return newXhr;
+}
+
 // This function saves all file uploads
 function saveFile() {
-  // Max size: 20mb
-  const MAX_SIZE = 20 * 1000 * 1000;
+  const MAX_SIZE = 20 * 1000 * 1000; // Max size: 20mb
   const file = $('#file').prop('files')[0];
 
-  if(file.size <=  MAX_SIZE) {
+  if(file.size <= MAX_SIZE) {
     const form = new FormData();
     form.append('page[file]', file);
     const progressBar = $('#file-upload-progress');
-
     $.ajax({
       async: true,
       url: getPagePath(),
@@ -62,32 +75,11 @@ function saveFile() {
       cache: false,
       contentType: false,
       data: form,
-      beforeSend: function () {
-        progressBar.addClass('active');
-      },
-      xhr: function () {
-        var newXhr = $.ajaxSettings.xhr();
-        if(newXhr.upload) {
-          newXhr.upload.addEventListener('progress', function (e) {
-            if (e.lengthComputable) {
-              progressBar.attr({
-                value: e.loaded,
-                max: e.total
-              });
-            }
-          }, false);
-        }
-        return newXhr;
-      },
-      success: function (resp) {
-        location.reload();
-      },
-      error: function (e) {
-        displayErrorMessage();
-      },
-      complete: function () {
-        progressBar.removeClass('active');
-      }
+      beforeSend: () => progressBar.addClass('active'),
+      xhr: updateProgressBar,
+      success: (resp) => location.reload(),
+      error: displayErrorMessage,
+      complete: () => progressBar.removeClass('active')
     });
   } else {
     displayErrorMessage();
