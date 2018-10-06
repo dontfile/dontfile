@@ -94,15 +94,29 @@ function goToPage() {
   }
 }
 
+function updateText(){
+  $.ajax({
+    url: getPagePath() + '.json',
+    type: "GET",
+    success: (resp) => {
+      let textArea = $('#text');
+      textArea.val(resp.content);
+    }
+  });
+}
+
 $(() => {
   let textArea = $('#text');
   let timeout = null;
 
   textArea.keyup(() => {
     clearTimeout(timeout);
-
     timeout = setTimeout(() => {
       saveText(textArea.val());
     }, 800);
   });
+  
+  setInterval(() => {
+    updateText();
+  }, 10000);
 });
