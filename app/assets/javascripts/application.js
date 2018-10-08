@@ -20,7 +20,7 @@
 function getPagePath() {
   const container = $("#container");
   const pagePath = "/" + container.attr("data-path");
-  
+
   return pagePath;
 }
 
@@ -43,30 +43,44 @@ function displayErrorMessage() {
   $('#file').val('');
 }
 
+function updateProgressBar() {
+  var newXhr = $.ajaxSettings.xhr();
+  if(newXhr.upload) {
+    newXhr.upload.addEventListener('progress', function (e) {
+      if (e.lengthComputable) {
+        $('#file-upload-progress').attr({
+          value: e.loaded,
+          max: e.total
+        });
+      }
+    }, false);
+  }
+  return newXhr;
+}
+
 // This function saves all file uploads
 function saveFile() {
-  // Max size: 20mb
-  const MAX_SIZE = 20 * 1000 * 1000;
+  const MAX_SIZE = 20 * 1000 * 1000; // Max size: 20mb
   const file = $('#file').prop('files')[0];
 
-  if(file.size <=  MAX_SIZE) {
+  if(file.size <= MAX_SIZE) {
     const form = new FormData();
     form.append('page[file]', file);
-  
+    const progressBar = $('#file-upload-progress');
     $.ajax({
       async: true,
       url: getPagePath(),
       type: 'PATCH',
-      processData: false, 
+      processData: false,
+      cache: false,
       contentType: false,
       data: form,
-      success: function (resp) {
-        location.reload();
-      },
-      error: function (e) {
-        displayErrorMessage();
-      }
-    }); 
+      beforeSend: () => progressBar.addClass('active'),
+      xhr: updateProgressBar,
+      success: (resp) => location.reload(),
+      error: displayErrorMessage,
+      complete: () => progressBar.removeClass('active')
+    });
   } else {
     displayErrorMessage();
   }

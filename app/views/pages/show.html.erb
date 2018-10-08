@@ -1,6 +1,6 @@
 <% title @page.url %>
 
-<h1>Dontfile</h1> 
+<h1>Dontfile</h1>
 
 <div id="container" data-path="<%= @page.url %>">
   <div id="text-area">
@@ -24,7 +24,7 @@
           <a class="button" title='Download File' href="<%= rails_blob_url(@page.file) %>" download>
             <%= icon('far', 'arrow-alt-circle-down') %>
           </a>
-          
+
           <%= button_to delete_file_path, method: :delete, params: { url: @page.url }, title: 'Delete File', data: { confirm: "Are you sure?" } do %>
             <%= icon('far', 'trash-alt') %>
           <% end %>
@@ -32,4 +32,5 @@
       <% end %>
     </div>
   </div>
+  <progress id="file-upload-progress" value="0"></progress>
 </div>
