@@ -4,7 +4,7 @@ env:
 language: ruby
 sudo: required
 rvm:
-- 2.4.1
+- 2.5.1
 addons:
   postgresql: 9.6
 cache: bundler
