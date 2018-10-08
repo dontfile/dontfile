@@ -241,7 +241,7 @@ DEPENDENCIES
   newrelic_rpm
   pg (>= 0.18, < 2.0)
   puma (~> 3.7)
-  rails (~> 5.2.0)
+  rails
   rails-controller-testing
   rubocop
   sass-rails (~> 5.0)
