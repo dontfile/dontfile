@@ -30,7 +30,7 @@ Dontfile is an open source project intended to concatenate the proposed idea of 
 
 ### Setting up development environment
 
-1. Make sure you have correct Ruby 2.4.1 version, either with [RVM](https://rvm.io/) or [rbenv](https://github.com/rbenv/rbenv)
+1. Make sure you have correct Ruby version, either with [RVM](https://rvm.io/) or [rbenv](https://github.com/rbenv/rbenv)
 
 2. Install latest bundler
 
