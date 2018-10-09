@@ -35,7 +35,7 @@
 }
 
 #attachment {
-  display: flex;  
+  display: flex;
   flex-direction: row;
   align-items: center;
   @media screen and (max-width: "768px") {
@@ -50,16 +50,16 @@
 
   i {
     font-size: 25px;
-    height: auto; 
-    width: auto; 
+    height: auto;
+    width: auto;
   }
   i[class^='far fa-file-'] {
     font-size: 4em;
   }
   img {
-    height: auto; 
-    width: auto; 
-    max-width: 50px; 
+    height: auto;
+    width: auto;
+    max-width: 50px;
     max-height: 50px
   }
 }
@@ -71,7 +71,7 @@
   }
 
   &-title {
-    font-size: 5.5em;            
+    font-size: 5.5em;
   }
 
   &-description {
