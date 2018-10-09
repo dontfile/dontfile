@@ -25,8 +25,8 @@
 
 Dontfile is an open source project intended to concatenate the proposed idea of [dontpad](dontpad.com) aggregating the same logic to files along with texts, thus creating a more complete tool.
 
-* Ruby version: 2.4.1
-* Rails version: 5.2.0
+* Ruby version: 2.5.1
+* Rails version: 5.2.1
 
 ### Setting up development environment
 
@@ -34,19 +34,19 @@ Dontfile is an open source project intended to concatenate the proposed idea of 
 
 2. Install latest bundler
 
-```bash 
+```bash
 gem install bundler
 ```
 
 3. Bundle the necessary gems
 
-```bash 
+```bash
 bundle install
 ```
 
 4. Create the database
 
-```bash 
+```bash
 rails db:create
 ```
 
