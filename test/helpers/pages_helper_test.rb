@@ -11,7 +11,7 @@ class PagesHelperTest < ActionView::TestCase
   end
 
   test "should get the icon of zip when zip file uploaded" do
-    assert_dom_equal(%{<i class="fa fa-file-image"></i>}, attachment_icon("image/jpeg"))
+    assert_dom_equal(%{<i class="fa fa-file-archive"></i>}, attachment_icon("application/zip"))
   end
 
   test "should get the icon of pdf when pdf file uploaded" do
