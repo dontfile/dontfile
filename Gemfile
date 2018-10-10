@@ -48,6 +48,7 @@ gem "webpacker", "~> 3.4"
 gem "newrelic_rpm"
 
 gem "rubyzip"
+gem "mini_magick", "~> 4.8"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
