@@ -13,6 +13,8 @@ before_install:
     > cc-test-reporter
   - chmod +x cc-test-reporter
   - "./cc-test-reporter before-build"
+  - sudo apt-get install -qq qpdf ghostscript poppler-utils
+  - echo `which pdfinfo`
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database dontfile_test;' -U postgres
