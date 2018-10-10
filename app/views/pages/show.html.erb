@@ -17,7 +17,7 @@
 
     <div id="attachment">
       <% if @page.file.attached? %>
-        <%= icon('far', 'file-alt') %>
+        <%= attachment_icon(@page.file_blob.content_type) %>
         <p><%= @page.file_blob.filename %></p>
 
         <div id="buttons">
