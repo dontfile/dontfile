@@ -55,6 +55,18 @@ class PagesController < ApplicationController
     redirect_back(fallback_location: "show")
   end
 
+  def update_filename
+    respond_to do |format|
+      new_file_name = update_page_params[:name]
+
+      if @page.update_filename(new_file_name)
+        format.json { render json: { data: { filename: new_file_name } } }
+      end
+
+      format.json {}
+    end
+  end
+
   private
 
     # Use callbacks to share common setup or constraints between actions.
@@ -64,7 +76,7 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def update_page_params
-      params.require(:page).permit(:content, :url, :file)
+      params.require(:page).permit(:content, :url, :file, :name)
     end
 
     def create_page_params

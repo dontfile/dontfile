@@ -6,6 +6,16 @@ class Page < ApplicationRecord
 
   validate :file_size
 
+  def update_filename(new_file_name)
+    return unless new_file_name.present?
+
+    file_extension = file_blob.filename.extension
+
+    file_blob.filename = [new_file_name, file_extension].join(".")
+
+    file_blob.save!
+  end
+
   private
 
     def file_size

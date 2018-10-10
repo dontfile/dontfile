@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # resources :pages
 
   get "/:url", to: "pages#find", as: :page
+  patch "/:url/update-filename.json", to: "pages#update_filename", as: :update_filename
   patch "/:url", to: "pages#update"
   delete :delete_file, to: "pages#delete_file", as: :delete_file
 
