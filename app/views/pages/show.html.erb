@@ -15,8 +15,8 @@
       <input type="file" id="file" onchange="saveFile()"></input>
     </div>
 
-    <div id="attachment">
-      <% if @page.file.attached? %>
+    <% if @page.file.attached? %>
+      <div id="attachment">
         <%= attachment_icon(@page.file_blob.content_type) %>
         <p><%= @page.file_blob.filename %></p>
 
@@ -29,8 +29,16 @@
             <%= icon('far', 'trash-alt') %>
           <% end %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
+
+  <% if @page.file.attached? && previewable_file? %>
+    <div class="file-preview">
+      <h2>File Preview</h2>
+      <%= image_tag(file_preview_source) %>
+    </div>
+  <% end %>
+
   <progress id="file-upload-progress" value="0"></progress>
 </div>
