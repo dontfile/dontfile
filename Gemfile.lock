@@ -244,6 +244,7 @@ DEPENDENCIES
   rails
   rails-controller-testing
   rubocop
+  rubyzip
   sass-rails (~> 5.0)
   selenium-webdriver
   simplecov

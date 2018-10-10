@@ -9,7 +9,24 @@ class PagesController < ApplicationController
       @page.save
     end
 
-    render "show"
+    respond_to do |format|
+      format.html { render "show" }
+
+      format.zip {
+        zip_filename = "tmp/#{@page.url}.zip"
+
+        Zip::File.open(zip_filename, Zip::File::CREATE) do |zipfile|
+          zipfile.get_output_stream("#{@page.url}.txt") { |f| f.write @page.content }
+
+          if @page.file.attached?
+            filepath = ActiveStorage::Blob.service.send(:path_for, @page.file.key)
+            zipfile.add(@page.file.filename.to_s, filepath)
+          end
+        end
+
+        send_file zip_filename
+      }
+    end
   end
 
   def index; end
