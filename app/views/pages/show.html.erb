@@ -18,7 +18,19 @@
     <div id="attachment">
       <% if @page.file.attached? %>
         <%= attachment_icon(@page.file_blob.content_type) %>
-        <p><%= @page.file_blob.filename %></p>
+        <p class="filename"><%= @page.file_blob.filename %></p>
+
+        <%= content_tag :p, class: 'filename-edit-container hidden' do -%>
+          <%= text_field_tag 'filename', @page.file_blob.filename.base %>
+
+          <span id="file-extension">
+            <%= ".#{@page.file_blob.filename.extension}" %>
+          </span>
+
+          <button class="button" type="button" name="update-filename-button" onclick="updateFileName()">
+            <%= icon('fas', 'check') %>
+          </button>
+        <% end -%>
 
         <div id="buttons">
           <a class="button" title='Download File' href="<%= rails_blob_url(@page.file) %>" download>
@@ -28,6 +40,10 @@
           <%= button_to delete_file_path, method: :delete, params: { url: @page.url }, title: 'Delete File', data: { confirm: "Are you sure?" } do %>
             <%= icon('far', 'trash-alt') %>
           <% end %>
+
+          <button type="button" class="button" onclick="toggleFileNameEditInput(true)">
+            <%= icon('far', 'edit') %>
+          </button>
         </div>
       <% end %>
     </div>

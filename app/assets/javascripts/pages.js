@@ -86,9 +86,53 @@ function updateText(){
   });
 }
 
+function toggleFileNameEditInput(inputWillShow) {
+  const editContainer = document.querySelector('.filename-edit-container');
+  const filename = document.querySelector('.filename');
+
+  if (inputWillShow) {
+    editContainer.classList.remove('hidden');
+    filename.classList.add('hidden');
+  } else {
+    editContainer.classList.add('hidden');
+    filename.classList.remove('hidden');
+  }
+}
+
+function updateFileName() {
+  const fileExtension = document.getElementById('file-extension').innerText;
+  const fileNameEditElement = document.getElementById('filename');
+  const newFileName = fileNameEditElement.value;
+
+  $.ajax({
+    url: getPagePath() + '/update-filename.json',
+    type: 'PATCH',
+    data: {
+      page: {
+        name: newFileName
+      }
+    },
+    success: function (response) {
+      const newName = `${response.data.filename}${fileExtension}`;
+
+      document.querySelector('.filename').innerText = newName;
+      document.getElementById('filename').value = newName;
+      toggleFileNameEditInput(false);
+    }
+  });
+}
+
+function onFilenameKeyUp(event) {
+  if (event.keyCode === 13) {
+    updateFileName();
+  }
+}
+
 $(() => {
   let textArea = $('#text');
   let timeout = null;
+
+  document.getElementById('filename').addEventListener('keyup', onFilenameKeyUp);
 
   textArea.keyup(() => {
     clearTimeout(timeout);
