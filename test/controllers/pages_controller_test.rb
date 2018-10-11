@@ -116,4 +116,48 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     @page.reload
     refute @page.file.attached?
   end
+
+  test "should create a zip file" do
+    req_url = "#{@page.url}.zip"
+    expected_zip_file = "tmp/#{req_url}"
+
+    get "/#{req_url}"
+
+    assert File.file?(expected_zip_file)
+    File.delete expected_zip_file
+  end
+
+  test "should download a zip file" do
+    req_url = "#{@page.url}.zip"
+    expected_zip_file = "tmp/#{req_url}"
+
+    get "/#{req_url}"
+
+    assert_equal @response.header["Content-Type"], "application/zip"
+    assert_equal @response.header["Content-Disposition"], "attachment; filename=\"#{req_url}\""
+
+    File.delete expected_zip_file
+  end
+
+  test "should create a zip file with appropriate content" do
+    image_filename = "dontfile.png"
+
+    @page.file.attach(
+      io: File.open("public/#{image_filename}"),
+      filename: image_filename
+    )
+    @page.save!
+
+    req_url = "#{@page.url}.zip"
+    expected_zip_file = "tmp/#{req_url}"
+
+    get "/#{req_url}"
+
+    Zip::File.open(expected_zip_file) do |zip_file|
+      files = zip_file.map { |file| file.name }
+      assert_equal files, ["#{@page.url}.txt", image_filename]
+    end
+
+    File.delete expected_zip_file
+  end
 end
