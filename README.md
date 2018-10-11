@@ -40,14 +40,7 @@ Website to store and share text and files (up to 20MB) using URL paths. Continuo
 
 - [Rails](https://rubyonrails.org/)
 
-<<<<<<< HEAD
-
 ## Features
-
-=======
-Dontfile is an open source project intended to concatenate the proposed idea of [dontpad](http://dontpad.com/) aggregating the same logic to files along with texts, thus creating a more complete tool.
-
-> > > > > > > f733752e978ccd11fda794dbfd9d4ddc817fd1bf
 
 - Active storage
 - Collaboration using URLs
