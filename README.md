@@ -23,7 +23,7 @@
 
 ### Description
 
-Dontfile is an open source project intended to concatenate the proposed idea of [dontpad](dontpad.com) aggregating the same logic to files along with texts, thus creating a more complete tool.
+Dontfile is an open source project intended to concatenate the proposed idea of [dontpad](http://dontpad.com/) aggregating the same logic to files along with texts, thus creating a more complete tool.
 
 * Ruby version: 2.5.1
 * Rails version: 5.2.1
