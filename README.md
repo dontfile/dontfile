@@ -3,17 +3,8 @@
   <h3 align="center">Dontfile</h3>
 </p>
 
-# Dontfile
-
-Website to store and share text and files (up to 20MB) using URL paths. Continuously saves data as you type. Hosted at http://dontfile.com
-
-## Motivation
-
-[Dontpad](http://dontpad.com) has similar functionality with text but is not open source. Dontfile builds on the idea of dontpad with extra features such as file uploads.
-
-## Build status
-
 <p align="center">
+  <i>The dontpad of files</i>
   <br>
   <br>
   <a href="https://travis-ci.org/MatheusRich/dontfile">
@@ -29,16 +20,22 @@ Website to store and share text and files (up to 20MB) using URL paths. Continuo
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
   </a>
 </p>
- 
+
+# Dontfile
+
+Website to store and share text and files (up to 20MB) using URL paths. Continuously saves data as you type. Hosted at http://dontfile.com
+
+## Motivation
+
+[Dontpad](http://dontpad.com) has similar functionality with text but is not open source. Dontfile builds on the idea of dontpad with extra features such as file uploads.
+
 ## Screenshots
 
 ![dontfile screenshot](https://i.imgur.com/ltqRqUl.png)
 
 ## Tech/framework used
 
-<b>Built with</b>
-
-- [Rails](https://rubyonrails.org/)
+Dontfile is built with [Ruby](https://www.ruby-lang.org/en/) language with the [Ruby on Rails](https://rubyonrails.org/) web framework
 
 ## Features
 
@@ -112,19 +109,14 @@ rails test
 
 ## Contribute
 
-Fork and make a pull request
+See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on how to contribute.
 
 ## Credits
 
-The idea is thanks to [dontpad](http://dontpad.com)
+Dontfile was inspired by [dontpad](http://dontpad.com) philosophy.
 
 ## License
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so...
+MIT © [Matheus Richard](https://github.com/MatheusRich)
 
-MIT © [Matheus Richard]()
+See [LICENSE](LICENSE) for details
