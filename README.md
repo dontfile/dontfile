@@ -1,4 +1,4 @@
- <p align="center">
+<p align="center">
   <img style="text-align:center;" src="public/dontfile.png" width=150 height=150>
   <h3 align="center">Dontfile</h3>
 </p>
@@ -21,19 +21,9 @@
   </a>
 </p>
 
-# Dontfile
+Dontfile is an open source website to store and share text and files (up to 20MB) using URL paths. It continuously saves data as you type. Hosted at http://dontfile.com.
 
-Website to store and share text and files (up to 20MB) using URL paths. Continuously saves data as you type. Hosted at http://dontfile.com
-
-## Motivation
-
-[Dontpad](http://dontpad.com) has similar functionality with text but is not open source. Dontfile builds on the idea of dontpad with extra features such as file uploads.
-
-## Screenshots
-
-![dontfile screenshot](https://i.imgur.com/ltqRqUl.png)
-
-## Tech/framework used
+## Tech/Framework used
 
 Dontfile is built with [Ruby](https://www.ruby-lang.org/en/) language with the [Ruby on Rails](https://rubyonrails.org/) web framework
 
@@ -89,7 +79,8 @@ rails server
 
 #### Prerequisites for docker
 
-An installation of [Docker](https://docs.docker.com/install/)
+- [Docker](https://docs.docker.com/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 #### Steps
 
@@ -108,15 +99,13 @@ rails test
 ```
 
 ## Contribute
-
-See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on how to contribute.
+Did you find a bug or want to contribute to Dontfile? See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on how to get started.
 
 ## Credits
 
 Dontfile was inspired by [dontpad](http://dontpad.com) philosophy.
 
 ## License
+Dontfile is under the [MIT License](LICENSE)! You can download, change and share the source code!
 
 MIT © [Matheus Richard](https://github.com/MatheusRich)
-
-See [LICENSE](LICENSE) for details
