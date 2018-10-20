@@ -10,8 +10,6 @@ class PagesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render "show" }
-
       format.zip {
         zip_filename = "tmp/#{@page.url}.zip"
 
@@ -26,6 +24,8 @@ class PagesController < ApplicationController
 
         send_file zip_filename
       }
+
+      format.any(:html, :json) { render "show" }
     end
   end
 
