@@ -2,15 +2,12 @@
 
 bundle check || bundle install
 
-# wait for postgresql
-# until nc -z -v -w30 $DB_HOST 5432
-# do
-#   echo 'Waiting for PostgreSQL...'
-#   sleep 1
-# done
-# echo "PostgreSQL is up and running"
+while ! pg_isready -h $PG_HOST -p $PG_PORT -q -U $PG_USERNAME; do
+  >&2 echo "Postgres is unavailable - sleeping..."
+  sleep 5
+done
+>&2 echo "Postgres is up - executing commands..."
 
-pidfile='/dontfile/tmp/pids/server.pid'
 if [ -f $pidfile ] ; then
   echo 'Server PID file exists. Removing it...'
   rm $pidfile
