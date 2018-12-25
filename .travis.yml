@@ -1,6 +1,9 @@
 env:
   global:
     CC_TEST_REPORTER_ID: c45fcc839a26cf4207ee1407607588daae2bee3e0a119976ac9830b05d682f74
+  matrix:
+    - TASK="bundle exec rails test"
+    - TASK="bundle exec rubocop"
 language: ruby
 sudo: required
 rvm:
@@ -20,8 +23,7 @@ script:
 - bundle install
 - bundle exec rails db:create
 - bundle exec rails db:migrate RAILS_ENV=test
-- bundle exec rails test
-- bundle exec rubocop
+- $TASK
 after_script:
 - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
 deploy:
