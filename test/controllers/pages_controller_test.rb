@@ -29,8 +29,8 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
         path: "/#{@page.url}"
       },
       { controller: "pages",
-      action: "update",
-      url: @page.url }
+        action: "update",
+        url: @page.url }
     )
   end
 
