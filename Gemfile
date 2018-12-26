@@ -47,7 +47,7 @@ gem "webpacker", "~> 3.4"
 
 gem "newrelic_rpm"
 
-gem "rubyzip"
+gem "rubyzip", require: "zip"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
