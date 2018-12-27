@@ -1,8 +1,17 @@
 env:
   global:
     CC_TEST_REPORTER_ID: c45fcc839a26cf4207ee1407607588daae2bee3e0a119976ac9830b05d682f74
+    RAILS_ENV: test
+matrix:
+  include:
+  - name: "All Tests"
+    env:
+    - DB_SET1="bundle exec rails db:create"
+    - DB_SET2="bundle exec rails db:migrate"
+    - TASK="bundle exec rails test"
+  - name: "Rubocop"
+    env: TASK="bundle exec rubocop"
 language: ruby
-sudo: required
 rvm:
 - 2.5.1
 addons:
@@ -15,15 +24,13 @@ before_install:
 - "./cc-test-reporter before-build"
 before_script:
 - cp config/database.yml.travis config/database.yml
-- psql -c 'create database dontfile_test;' -U postgres
-script:
 - bundle install
-- bundle exec rails db:create
-- bundle exec rails db:migrate RAILS_ENV=test
-- bundle exec rails test
-- bundle exec rubocop
+- $DB_SET1
+- $DB_SET2
+script:
+- $TASK
 after_script:
-- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+- "./cc-test-reporter after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT"
 deploy:
   on:
     tags: true

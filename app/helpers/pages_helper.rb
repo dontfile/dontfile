@@ -7,7 +7,7 @@ module PagesHelper
                    when /video\// then { style: "far", name: "file-video" }
                    else
                      { style: "far", name: "file-alt" }
-    end
+                   end
 
     icon(icon_classes[:style], icon_classes[:name])
   end
