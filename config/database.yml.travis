@@ -1,4 +1,9 @@
 test:
   adapter: postgresql
-  database: dontfile_test
+  database: travis_ci_test
+  encoding: unicode
   username: postgres
+  host: localhost
+  password:
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
