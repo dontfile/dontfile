@@ -30,7 +30,7 @@ before_script:
 script:
 - $TASK
 after_script:
-- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+- "./cc-test-reporter after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT"
 deploy:
   on:
     tags: true
