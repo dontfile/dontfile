@@ -16,7 +16,7 @@ if [ -f $pidfile ] ; then
   rm $pidfile
 fi
 
-# If database exists, migrate. Otherweise create and seed
+# If database exists, migrate. Otherwise, create and seed
 bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:setup db:seed
 echo "Database setup complete! Running the server."
 
