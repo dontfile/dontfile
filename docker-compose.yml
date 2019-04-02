@@ -1,25 +1,35 @@
-version: '3'
+version: '3.5'
 services:
   db:
     container_name: db
     image: postgres:9.6
-    # volumes:
-    #   - ./tmp/db:/var/lib/postgresql/data
-    environment:
-      - PG_USERNAME=postgres
-      - PG_DATABASE=dontfile_development
-      - PG_HOST=db
-      # - PG_HOST=falko-database
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    env_file:
+      - dontfile.env
+    networks:
+      - dontfile-network
+
   web:
     container_name: web
     command: ["sh", "startup.sh"]
     build: .
     volumes:
       - .:/dontfile
+      - bundle:/usr/local/bundle
     ports:
-      - "3000:3000"
+      - 3000:3000
     depends_on:
       - db
-    environment:
-      - PG_HOST=db
-      - PG_USERNAME=postgres
+    env_file:
+      - dontfile.env
+    networks:
+      - dontfile-network
+
+networks:
+  dontfile-network:
+    name: dontfile-network
+
+volumes:
+  pg-data: {}
+  bundle:
