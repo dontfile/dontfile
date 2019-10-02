@@ -134,7 +134,8 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get "/#{req_url}"
 
     assert_equal @response.header["Content-Type"], "application/zip"
-    assert_equal @response.header["Content-Disposition"], "attachment; filename=\"#{req_url}\""
+    assert_equal @response.header["Content-Disposition"],
+                 "attachment; filename=\"#{req_url}\"; filename*=UTF-8''#{req_url}"
 
     File.delete expected_zip_file
   end
