@@ -10,7 +10,7 @@ class Page < ApplicationRecord
 
     def file_size
       if file.attached? && file.byte_size > MAX_FILE_SIZE
-        file.purge
+        self.file = nil
         errors.add(:file, "File is too big. Max size is 20mb.")
       end
     end

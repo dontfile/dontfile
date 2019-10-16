@@ -8,9 +8,9 @@ while ! pg_isready -h $PG_HOST -p $PG_PORT -q -U $PG_USERNAME; do
 done
 >&2 echo "Postgres is up - executing commands..."
 
-if [ -f $pidfile ] ; then
+if [ -f $PIDFILE ] ; then
   echo 'Server PID file exists. Removing it...'
-  rm $pidfile
+  rm $PIDFILE
 fi
 
 # If database exists, migrate. Otherwise, create and seed

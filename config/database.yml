@@ -17,9 +17,9 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV["PG_HOST"] %>
-  username: <%= ENV["PG_USERNAME"] %>
-  password:
+  host: <%= ENV.fetch("PG_HOST") { "127.0.0.1" } %>
+  username: <%= ENV.fetch("PG_USERNAME") { "postgres" } %>
+  password: <%= ENV.fetch("PG_PASSWORD") { "password" } %>
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -60,7 +60,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: dontfile_test
+  database: <%= ENV["CI"] == "enabled" ? "travis_ci_test" : "dontfile_test" %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
