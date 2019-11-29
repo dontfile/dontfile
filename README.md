@@ -40,8 +40,8 @@ Dontfile is built with [Ruby](https://www.ruby-lang.org/en/) language with the [
 
 #### Prerequisites
 
-- Ruby version: 2.5.1
-- Rails version: 5.2.1
+- Ruby version: 2.6.5
+- Rails version: 6.0.1
 
 #### Install latest bundler
 
