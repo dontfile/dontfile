@@ -39,7 +39,7 @@ function saveText(pageText) {
 }
 
 function displayErrorMessage() {
-  alert("File is too big. Max size is 20mb.");
+  alert("File is too big. Max size is 100mb.");
   $('#file').val('');
 }
 
@@ -60,7 +60,7 @@ function updateProgressBar() {
 
 // This function saves all file uploads
 function saveFile() {
-  const MAX_SIZE = 20 * 1000 * 1000; // Max size: 20mb
+  const MAX_SIZE = 100 * 1000 * 1000; // Max size: 100mb
   const file = $('#file').prop('files')[0];
 
   if(file.size <= MAX_SIZE) {

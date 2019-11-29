@@ -53,7 +53,7 @@ class PageTest < ActiveSupport::TestCase
     assert_equal "Validation failed: File File is too big. Max size is 20mb.", exception.message
     refute @page.file.attached?
 
-    reset_max_file_size_constant(20.0.megabytes)
-    assert_equal 20.0.megabytes, Page::MAX_FILE_SIZE
+    reset_max_file_size_constant(100.0.megabytes)
+    assert_equal 100.0.megabytes, Page::MAX_FILE_SIZE
   end
 end

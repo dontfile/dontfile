@@ -94,8 +94,8 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
 
     refute @page.file.attached?
 
-    reset_max_file_size_constant(20.0.megabytes)
-    assert_equal 20.0.megabytes, Page::MAX_FILE_SIZE
+    reset_max_file_size_constant(100.0.megabytes)
+    assert_equal 100.0.megabytes, Page::MAX_FILE_SIZE
   end
 
   test "should delete file" do
