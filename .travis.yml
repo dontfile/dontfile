@@ -25,22 +25,26 @@ install:
 - bundle exec rails db:schema:load || bundle exec rails db:migrate
 jobs:
   include:
-  - name: Models Tests
+  - stage: test
+  - name: Model Tests
     script: bundle exec rails test:models
-  - name: Controllers Tests
+  - name: Controller Tests
     script: bundle exec rails test:controllers
   - name: Rubocop Linter
     script: bundle exec rubocop
-  - name: Docker Builds
+  - name: Docker Build
     script: docker build -t dontfile .
+  - stage: deploy
+    script: skip
+    deploy: &heroku
+      on:
+        tags: true
+        all_branches: true
+        repo: MatheusRich/dontfile
+      provider: heroku
+      app: dont-file
+      api_key:
+        secure: wXCfybAthfHNBSabChtNqMhmC/SD/HocWKWe1KWhcQVkZbuuw+wAPsVqsZPEYYF9+9rKh1FH00qFjQBpa95rotwGHSo38wo4vKMlXcE/sCVkMbpjJ0tQOWK3yursZ5dIcIfYKEedWyOc3VuteY9CxfLV9uxAHvxisB6YvBewsWBNCRm/umFxN4czREIjqtpb9lvGgek5rw/TVpZuBLM/j/pPwUR6YRMU/GN1AZQLPf/9uhpcQB5cwWfKBRxDAvPTMtKZ0ceCNY8BqbVl5VWq7fpd981IgsjwnYvxsy9kVlTYvx13t5HKqLZ23JDc+64zdoochM08LMaGUDonYFjcFYSlGD3WMsWowINDt9E9oFK8atXYlreFZ15bLxbzIjEYL8BOMsJlwsd0eZmMQAUbq8vAIYxqD4ODjspcxgxswLOYL3WQBxQi16+it9gReC8x75wj7RB81XVnrNB+xixksrWxy20NG7rAHwRmfHia57MOw2rLbh7D6c1SoutZIp64WAkU7wP5Hc91q3l4YSDDwN+U4hRg7LIlXDZsLRF+M+3P6yTEiIM5pVnNc0GtP0VNZ+H2g+8y1hp15bm4yJWPOMv/vaTV2M776tL9mEgqYIWWRvUVyt6nIL93PEMGPXxJLLV/jQ7OSeyvuOl5E7BEbsdJOiElNX9cLji8GlO2H38=
+
 after_script:
 - "./cc-test-reporter after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT"
-deploy:
-  on:
-    tags: true
-    all_branches: true
-    repo: MatheusRich/dontfile
-  provider: heroku
-  app: dont-file
-  api_key:
-    secure: wXCfybAthfHNBSabChtNqMhmC/SD/HocWKWe1KWhcQVkZbuuw+wAPsVqsZPEYYF9+9rKh1FH00qFjQBpa95rotwGHSo38wo4vKMlXcE/sCVkMbpjJ0tQOWK3yursZ5dIcIfYKEedWyOc3VuteY9CxfLV9uxAHvxisB6YvBewsWBNCRm/umFxN4czREIjqtpb9lvGgek5rw/TVpZuBLM/j/pPwUR6YRMU/GN1AZQLPf/9uhpcQB5cwWfKBRxDAvPTMtKZ0ceCNY8BqbVl5VWq7fpd981IgsjwnYvxsy9kVlTYvx13t5HKqLZ23JDc+64zdoochM08LMaGUDonYFjcFYSlGD3WMsWowINDt9E9oFK8atXYlreFZ15bLxbzIjEYL8BOMsJlwsd0eZmMQAUbq8vAIYxqD4ODjspcxgxswLOYL3WQBxQi16+it9gReC8x75wj7RB81XVnrNB+xixksrWxy20NG7rAHwRmfHia57MOw2rLbh7D6c1SoutZIp64WAkU7wP5Hc91q3l4YSDDwN+U4hRg7LIlXDZsLRF+M+3P6yTEiIM5pVnNc0GtP0VNZ+H2g+8y1hp15bm4yJWPOMv/vaTV2M776tL9mEgqYIWWRvUVyt6nIL93PEMGPXxJLLV/jQ7OSeyvuOl5E7BEbsdJOiElNX9cLji8GlO2H38=
