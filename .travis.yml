@@ -3,48 +3,38 @@ env:
     CC_TEST_REPORTER_ID: c45fcc839a26cf4207ee1407607588daae2bee3e0a119976ac9830b05d682f74
     RAILS_ENV: test
     CI: enabled
-
 language: ruby
-
 rvm:
-  - 2.5
-  - 2.6
-
+- 2.5
+- 2.6
 addons:
   postgresql: 9.6
-
 services:
-  - docker
-
+- docker
 cache:
   directories:
-   - $PWD/vendor/.bundle/
-
+  - "$PWD/vendor/.bundle/"
 before_install:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
-    > cc-test-reporter
-  - chmod +x cc-test-reporter
-  - ./cc-test-reporter before-build
-
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > cc-test-reporter
+- chmod +x cc-test-reporter
+- "./cc-test-reporter before-build"
 install:
-  - bundle check --path vendor/.bundle/ || bundle install --path vendor/.bundle/
-  - bundle exec rails db:create
-  - bundle exec rails db:schema:load || bundle exec rails db:migrate
-
+- bundle check --path vendor/.bundle/ || bundle install --path vendor/.bundle/
+- bundle exec rails db:create
+- bundle exec rails db:schema:load || bundle exec rails db:migrate
 jobs:
   include:
-    - name: "Models Tests"
-      script: bundle exec rails test:models
-    - name: "Controllers Tests"
-      script: bundle exec rails test:controllers
-    - name: "Rubocop Linter"
-      script: bundle exec rubocop
-    - name: "Docker Builds"
-      script: docker build -t dontfile .
-
+  - name: Models Tests
+    script: bundle exec rails test:models
+  - name: Controllers Tests
+    script: bundle exec rails test:controllers
+  - name: Rubocop Linter
+    script: bundle exec rubocop
+  - name: Docker Builds
+    script: docker build -t dontfile .
 after_script:
-  - ./cc-test-reporter after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
-
+- "./cc-test-reporter after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT"
 deploy:
   on:
     tags: true
@@ -53,4 +43,4 @@ deploy:
   provider: heroku
   app: dont-file
   api_key:
-    secure: AkRpf28cnWY1a3vXPwRSJmvcgJxW7HOJNUq5wxAsNR1lquAPT3EVC7s5GB3tcy68xheFEFXMUptmgljFZCO5wh+RcsBEVrGBF7Govqcp/+1gd0odgB4kt4ypXXyX9O0uSumFzmcr0MD0i3oFe6Co78Wc9+6no/Qo7C+Myw7HXZytUr8WJNOoOKP3YU5AtAa7XRMVzNAOBrSO8Wu37IVwf+t2cK1pemgvy5ATgITi9ViNH7ja8gKYUflRtGDuzfiTD1MFoYScP0BwrVZVZ42HLOO02Yivc1tqc0jDa6eii8La/+kuikajPPrY8YWlocqHMUtL9rHM6MpvLFylSdo+gAFFYVtmLK3lBZLd+Q5HUpttupWlz4ar8xNzMb6dFWD4SfR3MMvOnZVWye8WHDhvGVJ0Cwt0cFevQT+PDn8+ohBDwuodbvIfbwQLa+F5eCTcq/N3yuEuL5pZelX2OvHUMiyR++UY0bj27+0ZO+06mk598q7NAylu7M3XR3/cQxHMVqMrajtjn3ak/MKICjKXW01H9BV3mtPIE782oK4021VH6Z/LCMwo4Yte5sw024Eh4sIC4ibCztv+wRPYF0pV58gDkNrFShxA5MC2rFw7kMleLD7bW+/oS8Kjrg7QNrLoyt36c1K51fmTD/aFCkmbfOphs77EV2F+hLML2lVmums=
+    secure: wXCfybAthfHNBSabChtNqMhmC/SD/HocWKWe1KWhcQVkZbuuw+wAPsVqsZPEYYF9+9rKh1FH00qFjQBpa95rotwGHSo38wo4vKMlXcE/sCVkMbpjJ0tQOWK3yursZ5dIcIfYKEedWyOc3VuteY9CxfLV9uxAHvxisB6YvBewsWBNCRm/umFxN4czREIjqtpb9lvGgek5rw/TVpZuBLM/j/pPwUR6YRMU/GN1AZQLPf/9uhpcQB5cwWfKBRxDAvPTMtKZ0ceCNY8BqbVl5VWq7fpd981IgsjwnYvxsy9kVlTYvx13t5HKqLZ23JDc+64zdoochM08LMaGUDonYFjcFYSlGD3WMsWowINDt9E9oFK8atXYlreFZ15bLxbzIjEYL8BOMsJlwsd0eZmMQAUbq8vAIYxqD4ODjspcxgxswLOYL3WQBxQi16+it9gReC8x75wj7RB81XVnrNB+xixksrWxy20NG7rAHwRmfHia57MOw2rLbh7D6c1SoutZIp64WAkU7wP5Hc91q3l4YSDDwN+U4hRg7LIlXDZsLRF+M+3P6yTEiIM5pVnNc0GtP0VNZ+H2g+8y1hp15bm4yJWPOMv/vaTV2M776tL9mEgqYIWWRvUVyt6nIL93PEMGPXxJLLV/jQ7OSeyvuOl5E7BEbsdJOiElNX9cLji8GlO2H38=
