@@ -5,11 +5,6 @@ class PagesController < ApplicationController
   # GET /page
   # GET /page.json
   def find
-    if @page.nil?
-      @page = Page.new(create_page_params)
-      @page.save
-    end
-
     respond_to do |format|
       format.zip {
         zip_filename = "tmp/#{@page.url}.zip"
@@ -60,7 +55,7 @@ class PagesController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_page
-      @page = Page.find_by(url: params[:url])
+      @page = Page.find_or_create_by(url: params[:url])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
