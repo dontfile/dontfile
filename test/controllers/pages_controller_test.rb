@@ -8,17 +8,17 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     )
   end
 
-  test "should route find to existing pages" do
+  test "should route show to existing pages" do
     assert_routing "/#{@page.url}",
                    controller: "pages",
-                   action: "find",
+                   action: "show",
                    url: @page.url
   end
 
-  test "should route find to new pages" do
+  test "should route show to new pages" do
     assert_routing "/new_page",
                    controller: "pages",
-                   action: "find",
+                   action: "show",
                    url: "new_page"
   end
 
