@@ -2,8 +2,6 @@ class PagesController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
   before_action :set_page
 
-  # GET /page
-  # GET /page.json
   def show
     respond_to do |format|
       format.zip { download_zip_file }
@@ -11,8 +9,6 @@ class PagesController < ApplicationController
     end
   end
 
-  # PATCH /page
-  # PATCH /page.json
   def update
     respond_to do |format|
       if @page.update(update_page_params)
@@ -35,12 +31,10 @@ class PagesController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_page
       @page = Page.find_or_create_by(url_param)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def update_page_params
       params.require(:page).permit(:content, :url, :file)
     end
