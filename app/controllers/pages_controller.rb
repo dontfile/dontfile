@@ -13,7 +13,7 @@ class PagesController < ApplicationController
           zipfile.get_output_stream("#{@page.url}.txt") { |f| f.write @page.content }
 
           if @page.file.attached?
-            filepath = ActiveStorage::Blob.service.send(:path_for, @page.file.key)
+            filepath = ActiveStorage::Blob.service.path_for @page.file.key
             zipfile.add(@page.file.filename.to_s, filepath)
           end
         end
