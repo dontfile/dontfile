@@ -6,21 +6,7 @@ class PagesController < ApplicationController
   # GET /page.json
   def show
     respond_to do |format|
-      format.zip {
-        zip_filename = "tmp/#{@page.url}.zip"
-
-        Zip::File.open(zip_filename, Zip::File::CREATE) do |zipfile|
-          zipfile.get_output_stream("#{@page.url}.txt") { |f| f.write @page.content }
-
-          if @page.file.attached?
-            filepath = ActiveStorage::Blob.service.path_for @page.file.key
-            zipfile.add(@page.file.filename.to_s, filepath)
-          end
-        end
-
-        send_file zip_filename
-      }
-
+      format.zip { download_zip_file }
       format.any(:html, :json) { render "show" }
     end
   end
@@ -65,5 +51,20 @@ class PagesController < ApplicationController
 
     def url_param
       params.permit(:url)
+    end
+
+    def download_zip_file
+      zip_filename = "tmp/#{@page.url}.zip"
+
+      Zip::File.open(zip_filename, Zip::File::CREATE) do |zipfile|
+        zipfile.get_output_stream("#{@page.url}.txt") { |f| f.write @page.content }
+
+        if @page.file.attached?
+          filepath = ActiveStorage::Blob.service.path_for @page.file.key
+          zipfile.add(@page.file.filename.to_s, filepath)
+        end
+      end
+
+      send_file zip_filename
     end
 end
