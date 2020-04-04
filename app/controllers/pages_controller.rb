@@ -4,7 +4,7 @@ class PagesController < ApplicationController
 
   # GET /page
   # GET /page.json
-  def find
+  def show
     respond_to do |format|
       format.zip {
         zip_filename = "tmp/#{@page.url}.zip"
@@ -24,10 +24,6 @@ class PagesController < ApplicationController
       format.any(:html, :json) { render "show" }
     end
   end
-
-  def index; end
-
-  def show; end
 
   # PATCH /page
   # PATCH /page.json
@@ -58,7 +54,7 @@ class PagesController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_page
-      @page = Page.find_or_create_by(url: params[:url])
+      @page = Page.find_or_create_by(url_param)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -68,5 +64,9 @@ class PagesController < ApplicationController
 
     def create_page_params
       params.permit(:content, :url, :file)
+    end
+
+    def url_param
+      params.permit(:url)
     end
 end

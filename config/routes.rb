@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "pages#index"
   # resources :pages
 
-  get "/:url", to: "pages#find", as: :page
+  get "/:url", to: "pages#show", as: :page
   patch "/:url", to: "pages#update"
   delete :delete_file, to: "pages#delete_file", as: :delete_file
 
