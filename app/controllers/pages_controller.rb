@@ -30,10 +30,7 @@ class PagesController < ApplicationController
   def update
     respond_to do |format|
       if @page.update(update_page_params)
-        format.html {}
-        format.json {}
-
-        render "show"
+        format.any(:html, :json) { render "show" }
       else
         format.html { render "show", status: :not_acceptable }
         format.json { render json: @page.errors, status: :not_acceptable }
