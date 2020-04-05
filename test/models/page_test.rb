@@ -51,7 +51,7 @@ class PageTest < ActiveSupport::TestCase
     reset_max_file_size_constant
     assert_equal 0, Page::MAX_FILE_SIZE
 
-    exception = assert_raises (ActiveRecord::RecordInvalid) { @page.save! }
+    exception = assert_raises(ActiveRecord::RecordInvalid) { @page.save! }
     assert_equal 'Validation failed: File File is too big. Max size is 20mb.', exception.message
     assert_not @page.file.attached?
 
