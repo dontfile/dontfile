@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
   before_action :set_page
 
+  def index; end
+
   def show
     respond_to do |format|
       format.zip { download_zip_file }
