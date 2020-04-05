@@ -21,7 +21,7 @@
   </a>
 </p>
 
-Dontfile is an open source website to store and share text and files (up to 20MB) using URL paths. It continuously saves data as you type. Hosted at http://dontfile.com.
+Dontfile is an open source website to store and share text and files (up to 100MB) using URL paths. It continuously saves data as you type. Hosted at http://dontfile.com.
 
 ## Tech/Framework used
 
@@ -29,7 +29,6 @@ Dontfile is built with [Ruby](https://www.ruby-lang.org/en/) language with the [
 
 ## Features
 
-- Active storage
 - Collaboration using URLs
 - Text saved automatically
 - File storage
