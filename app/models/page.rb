@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Page < ApplicationRecord
   validates :url, presence: true, uniqueness: true
   has_one_attached :file
@@ -8,10 +10,10 @@ class Page < ApplicationRecord
 
   private
 
-    def file_size
-      if file.attached? && file.byte_size > MAX_FILE_SIZE
-        self.file = nil
-        errors.add(:file, "File is too big. Max size is 20mb.")
-      end
+  def file_size
+    if file.attached? && file.byte_size > MAX_FILE_SIZE
+      self.file = nil
+      errors.add(:file, 'File is too big. Max size is 20mb.')
     end
+  end
 end
