@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   get '/:url', to: 'pages#show', as: :page
   patch '/:url', to: 'pages#update'
-  delete :delete_file, to: 'pages#delete_file', as: :delete_file
 
   scope module: :page do
     get ':url/file', to: 'files#show', as: :page_file
