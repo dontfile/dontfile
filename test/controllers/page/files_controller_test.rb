@@ -15,18 +15,21 @@ class Page::FilesControllerTest < ActionDispatch::IntegrationTest
     @page.save!
   end
 
-  # test 'should upload file' do
-  #   assert_not @page.file.attached?
-  #   patch "/#{@page.url}", params: {
-  #     page: {
-  #       url: "/#{@page.url}",
-  #       file: fixture_file_upload('public/dontfile.png', 'image/png')
-  #     }
-  #   }
-  #   @page.reload
+  test 'should create file' do
+    new_page = Page.create(
+      url: 'other-page-url',
+      content: 'Some content'
+    )
 
-  #   assert @page.file.attached?
-  # end
+    post create_page_file_path(new_page.url), params: {
+      page: {
+        file: fixture_file_upload('public/dontfile.png', 'image/png')
+      }
+    }
+    new_page.reload
+
+    assert new_page.file.attached?
+  end
 
   # test 'should not upload file bigger than max size allowed' do
   #   assert_not @page.file.attached?

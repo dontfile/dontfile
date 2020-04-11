@@ -10,6 +10,11 @@ class Page::FilesController < ApplicationController
 
   def create
     respond_to do |format|
+      if @page.update(file_param)
+        format.json { render 'pages/show' }
+      else
+        format.json { render json: @page.errors, status: :not_acceptable }
+      end
     end
   end
 
@@ -19,11 +24,11 @@ class Page::FilesController < ApplicationController
   end
 
   def delete
-    respond_to do |format|
-      @page.file.purge
+    @page.file.purge
 
+    respond_to do |format|
       format.html { redirect_back(fallback_location: 'show') }
-      format.json { render 'show' }
+      format.json { render 'pages/show' }
     end
   end
 
@@ -31,5 +36,9 @@ class Page::FilesController < ApplicationController
 
   def set_page
     @page = Page.find_or_create_by(url_param)
+  end
+
+  def file_param
+    params.require(:page).permit(:file)
   end
 end
