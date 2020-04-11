@@ -23,15 +23,6 @@ class PagesController < ApplicationController
     end
   end
 
-  def delete_file
-    respond_to do |format|
-      @page.file.purge
-
-      format.html { redirect_back(fallback_location: 'show') }
-      format.json { render 'show' }
-    end
-  end
-
   private
 
   def update_page_params
