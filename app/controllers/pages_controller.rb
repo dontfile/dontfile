@@ -34,20 +34,12 @@ class PagesController < ApplicationController
 
   private
 
-  def set_page
-    @page = Page.find_or_create_by(url_param)
-  end
-
   def update_page_params
     params.require(:page).permit(:content, :url, :file)
   end
 
   def create_page_params
     params.permit(:content, :url, :file)
-  end
-
-  def url_param
-    params.permit(:url)
   end
 
   def download_zip_file
