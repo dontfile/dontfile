@@ -8,18 +8,14 @@ class Page::FilesController < ApplicationController
     end
   end
 
-  def create
+  def create_or_update
     respond_to do |format|
       if @page.update(file_param)
-        format.json { render 'pages/show' }
+        format.any(:html, :json) { render 'pages/show' }
       else
+        format.html { render 'show', status: :not_acceptable }
         format.json { render json: @page.errors, status: :not_acceptable }
       end
-    end
-  end
-
-  def update
-    respond_to do |format|
     end
   end
 
