@@ -13,7 +13,7 @@ class Page::FilesController < ApplicationController
       if @page.update(file_param)
         format.any(:html, :json) { render 'pages/show' }
       else
-        format.html { render 'show', status: :not_acceptable }
+        format.html { render 'pages/show', status: :not_acceptable }
         format.json { render json: @page.errors, status: :not_acceptable }
       end
     end
