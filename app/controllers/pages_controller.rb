@@ -29,10 +29,6 @@ class PagesController < ApplicationController
     params.require(:page).permit(:content, :url, :file)
   end
 
-  def create_page_params
-    params.permit(:content, :url, :file)
-  end
-
   def download_zip_file
     zip_filename = "tmp/#{@page.url}.zip"
 
