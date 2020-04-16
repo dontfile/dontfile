@@ -45,7 +45,7 @@ Please include docs in your pull requests.
 Bugs & Feature Requests
 -----------------------
 
-You can file bugs on the [issues tracker](https://github.com/MatheusRich/dontfile/issues), and tag them with 'bug'.
+You can file bugs on the [issues tracker](https://github.com/dontfile/dontfile/issues), and tag them with 'bug'.
 
 When filing a bug, please follow these tips to help us help you:
 

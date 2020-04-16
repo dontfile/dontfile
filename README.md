@@ -7,16 +7,16 @@
   <i>The dontpad of files</i>
   <br>
   <br>
-  <a href="https://travis-ci.org/MatheusRich/dontfile">
-    <img src="https://travis-ci.org/MatheusRich/dontfile.svg?branch=master" alt="Build Status">
+  <a href="https://travis-ci.org/dontfile/dontfile">
+    <img src="https://travis-ci.org/dontfile/dontfile.svg?branch=master" alt="Build Status">
   </a>
-  <a href="https://codeclimate.com/github/MatheusRich/dontfile/maintainability">
+  <a href="https://codeclimate.com/github/dontfile/dontfile/maintainability">
     <img src="https://api.codeclimate.com/v1/badges/786863e9b71eab0a50e9/maintainability" alt="Maintainability">
   </a>
-  <a href="https://codeclimate.com/github/MatheusRich/dontfile/test_coverage">
+  <a href="https://codeclimate.com/github/dontfile/dontfile/test_coverage">
     <img src="https://api.codeclimate.com/v1/badges/786863e9b71eab0a50e9/test_coverage" alt="Test Coverage">
   </a>
-  <a href="https://github.com/MatheusRich/dontfile/blob/master/LICENSE">
+  <a href="https://github.com/dontfile/dontfile/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
   </a>
 </p>

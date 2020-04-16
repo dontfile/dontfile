@@ -40,7 +40,7 @@ jobs:
       on:
         tags: true
         all_branches: true
-        repo: MatheusRich/dontfile
+        repo: dontfile/dontfile
       provider: heroku
       app: dont-file
       api_key:
