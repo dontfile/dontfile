@@ -36,6 +36,7 @@ export default class extends Controller {
     this.progressTarget.hidden = true
 
     if (request.status >= 200 && request.status < 300) {
+      this.inputTarget.value = ""
       Turbo.visit(window.location.href, { action: "replace" })
     } else {
       this.#refuse()
