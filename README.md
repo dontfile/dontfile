@@ -7,95 +7,75 @@
   <i>The dontpad of files</i>
   <br>
   <br>
-  <a href="https://travis-ci.org/dontfile/dontfile">
-    <img src="https://travis-ci.org/dontfile/dontfile.svg?branch=master" alt="Build Status">
-  </a>
-  <a href="https://codeclimate.com/github/dontfile/dontfile/maintainability">
-    <img src="https://api.codeclimate.com/v1/badges/786863e9b71eab0a50e9/maintainability" alt="Maintainability">
-  </a>
-  <a href="https://codeclimate.com/github/dontfile/dontfile/test_coverage">
-    <img src="https://api.codeclimate.com/v1/badges/786863e9b71eab0a50e9/test_coverage" alt="Test Coverage">
+  <a href="https://github.com/dontfile/dontfile/actions/workflows/ci.yml">
+    <img src="https://github.com/dontfile/dontfile/actions/workflows/ci.yml/badge.svg" alt="CI">
   </a>
   <a href="https://github.com/dontfile/dontfile/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
   </a>
 </p>
 
-Dontfile is an open source website to store and share text and files (up to 100MB) using URL paths. It continuously saves data as you type. Hosted at http://dontfile.com.
+Dontfile is an open source website to store and share text and files (up to 100MB) using URL paths. It saves the text while you type, and other visitors of the same URL see the changes immediately.
 
 ## Tech/Framework used
 
-Dontfile is built with [Ruby](https://www.ruby-lang.org/en/) language with the [Ruby on Rails](https://rubyonrails.org/) web framework
+Dontfile is a [Ruby on Rails](https://rubyonrails.org/) app. It uses SQLite, [Hotwire](https://hotwired.dev/) (Turbo and Stimulus) and Active Storage.
 
 ## Features
 
 - Collaboration using URLs
 - Text saved automatically
+- Live updates for other visitors of the same page
 - File storage
+- Download of the page text and file as `YourURL.zip`
 
-## Installation
+## Development
 
-### Local installation
+### Prerequisites
 
-#### Prerequisites
+- Ruby (see [`.ruby-version`](.ruby-version))
+- SQLite 3
 
-- Ruby version: 2.6.5
-- Rails version: 6.0.1
-
-#### Install latest bundler
-
-Install [bundler](https://bundler.io/)
+### Setup
 
 ```bash
-gem install bundler
+bin/setup
 ```
 
-#### Bundle the necessary gems
+This command installs the gems, prepares the database and starts the server on http://localhost:3000.
 
-```bash
-bundle install
-```
+### Configuration
 
-#### Create the database
-
-```bash
-rails db:create
-```
-
-#### Migrate the database
-
-```bash
-rails db:migrate
-```
-
-#### Run the server
-
-```bash
-rails server
-```
-
-### Docker
-
-#### Prerequisites for docker
-
-- [Docker](https://docs.docker.com/install/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-
-#### Steps
-
-Run docker compose
-
-```bash
-docker-compose up -d
-```
-
-Navigate to http://localhost:3000
+[`config/dontfile.yml`](config/dontfile.yml) holds the app settings, such as the file size limit.
 
 ## Tests
 
+The unit and controller tests:
+
 ```bash
-rails test
+bin/rails test
 ```
+
+The system tests (they use headless Chrome):
+
+```bash
+bin/rails test:system
+```
+
+All the CI checks (style, security and tests):
+
+```bash
+bin/ci
+```
+
+## Docker
+
+```bash
+docker build -t dontfile .
+docker run -d -p 80:80 -e SECRET_KEY_BASE=$(bin/rails secret) -v dontfile-storage:/rails/storage dontfile
+```
+
+The `storage` volume keeps the SQLite databases and the uploaded files. The production configuration expects HTTPS in front of the container.
 
 ## Contribute
 Did you find a bug or want to contribute to Dontfile? See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on how to get started.
@@ -103,6 +83,8 @@ Did you find a bug or want to contribute to Dontfile? See [CONTRIBUTING.md](.git
 ## Credits
 
 Dontfile was inspired by [dontpad](http://dontpad.com) philosophy.
+
+Icons are from [Bootstrap Icons](https://icons.getbootstrap.com/) (MIT).
 
 ## License
 Dontfile is under the [MIT License](LICENSE)! You can download, change and share the source code!
