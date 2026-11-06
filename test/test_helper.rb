@@ -1,23 +1,15 @@
-# frozen_string_literal: true
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
+require "rails/test_help"
 
-require 'simplecov'
-SimpleCov.start 'rails' do
-  add_filter '/mailers/'
-  add_filter '/jobs/'
-  add_filter '/channels/'
-end
+module ActiveSupport
+  class TestCase
+    # Run tests in parallel with specified workers
+    parallelize(workers: :number_of_processors)
 
-ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../config/environment', __dir__)
-require 'rails/test_help'
+    # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+    fixtures :all
 
-class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
-
-  # Add more helper methods to be used by all tests here...
-  def reset_max_file_size_constant(new_size = 0)
-    Page.send(:remove_const, 'MAX_FILE_SIZE')
-    Page.const_set('MAX_FILE_SIZE', new_size)
+    # Add more helper methods to be used by all tests here...
   end
 end
