@@ -47,13 +47,11 @@
     max-width: 230px;
   }
 
-  i {
+  .bi {
     font-size: 25px;
-    height: auto;
-    width: auto;
   }
 
-  i[class^="far fa-file-"] {
+  > .bi {
     font-size: 4em;
   }
 }
@@ -108,7 +106,7 @@
   bottom: 0.5em;
   width: 100%;
 
-  i {
+  .bi {
     font-size: 1.5em;
   }
 

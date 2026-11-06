@@ -1,14 +1,11 @@
 module PagesHelper
   def attachment_icon(content_type)
-    icon_classes = case content_type
-    when %r{/pdf} then { style: "far", name: "file-pdf" }
-    when %r{image/} then { style: "far", name: "file-image" }
-    when %r{/zip} then { style: "far", name: "file-archive" }
-    when %r{video/} then { style: "far", name: "file-video" }
-    else
-                     { style: "far", name: "file-alt" }
+    case content_type
+    when %r{/pdf} then render "icons/file_earmark_pdf"
+    when %r{image/} then render "icons/file_earmark_image"
+    when %r{/zip} then render "icons/file_earmark_zip"
+    when %r{video/} then render "icons/file_earmark_play"
+    else render "icons/file_earmark_text"
     end
-
-    icon(icon_classes[:style], icon_classes[:name])
   end
 end

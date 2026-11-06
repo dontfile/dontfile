@@ -20,3 +20,10 @@ p, ol, ul, td {
 label {
   display: block;
 }
+
+/* Bootstrap Icons (MIT), inlined from app/views/icons. They scale with the font size. */
+.bi {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}

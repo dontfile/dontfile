@@ -28,12 +28,12 @@
 
         <div id="buttons">
           <%= link_to rails_blob_path(@page.file, disposition: "attachment"), class: "button", title: "Download File" do %>
-            <%= icon("far", "arrow-alt-circle-down") %>
+            <%= render "icons/arrow_down_circle" %>
           <% end %>
 
           <%= button_to page_file_path(@page.url), method: :delete, title: "Delete File", class: "button",
                 form: { data: { turbo_confirm: "Are you sure?" } } do %>
-            <%= icon("far", "trash-alt") %>
+            <%= render "icons/trash" %>
           <% end %>
         </div>
       <% end %>
