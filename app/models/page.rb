@@ -1,19 +1,20 @@
-# frozen_string_literal: true
-
 class Page < ApplicationRecord
-  validates :url, presence: true, uniqueness: true
   has_one_attached :file
 
-  MAX_FILE_SIZE = 100.0.megabytes
-
+  validates :url, presence: true, uniqueness: true
   validate :file_size
 
-  private
+  broadcasts_refreshes
 
-  def file_size
-    return unless file.attached? && file.byte_size > MAX_FILE_SIZE
-
-    self.file = nil
-    errors.add(:file, 'File is too big. Max size is 20mb.')
+  def self.max_file_size
+    Rails.configuration.dontfile.max_file_size
   end
+
+  private
+    def file_size
+      return unless file.attached? && file.byte_size > self.class.max_file_size
+
+      self.file = nil
+      errors.add(:file, "is too big. Max size is #{ActiveSupport::NumberHelper.number_to_human_size(self.class.max_file_size)}.")
+    end
 end

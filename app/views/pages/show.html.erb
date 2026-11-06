@@ -1,41 +1,42 @@
 <% title @page.url %>
+<%= turbo_stream_from @page %>
 
 <h1>Dontfile</h1>
 
-<div id="container" data-path="<%= @page.url %>">
-  <div id="text-area">
-    <h2>Text</h2>
-    <textarea id="text"><%= @page.content %></textarea>
-  </div>
+<div id="container">
+  <%= form_with model: @page, url: page_path(@page.url), method: :patch, id: "text-area",
+        data: { controller: "autosave", action: "input->autosave#queue turbo:submit-end->autosave#saved turbo:before-morph-element->autosave#preserveTyping" } do |form| %>
+    <h2><%= form.label :content, "Text" %></h2>
+    <%= form.text_area :content, id: "text", data: { autosave_target: "text" } %>
+  <% end %>
 
-  <h2>File</h2>
+  <h2><label for="file">File</label></h2>
   <div id="file-area">
-    <div>
-      <h4>(Max size: 100mb)</h4>
-      <input type="file" id="file" onchange="saveFile()">
-    </div>
+    <%= form_with model: @page, url: page_file_path(@page.url), method: :patch,
+          data: { controller: "upload", upload_max_size_value: Page.max_file_size,
+                   upload_too_big_message_value: "File is too big. Max size is #{number_to_human_size(Page.max_file_size)}." } do |form| %>
+      <h4>(Max size: <%= number_to_human_size(Page.max_file_size) %>)</h4>
+      <%= form.file_field :file, id: "file", data: { upload_target: "input", action: "upload#submit" } %>
+      <noscript><%= form.button "Upload" %></noscript>
+      <progress data-upload-target="progress" value="0" hidden></progress>
+    <% end %>
 
     <div id="attachment">
       <% if @page.file.attached? %>
-        <%= attachment_icon(@page.file_blob.content_type) %>
-        <p><%= @page.file_blob.filename %></p>
+        <%= attachment_icon(@page.file.content_type) %>
+        <p><%= @page.file.filename %></p>
 
         <div id="buttons">
-          <a class="button" title='Download File' href="<%= rails_blob_url(@page.file) %>" download>
-            <%= icon('far', 'arrow-alt-circle-down') %>
-          </a>
+          <%= link_to rails_blob_path(@page.file, disposition: "attachment"), class: "button", title: "Download File" do %>
+            <%= icon("far", "arrow-alt-circle-down") %>
+          <% end %>
 
-          <%= button_to delete_file_path,
-            method: :delete,
-            params: { url: @page.url },
-            title: 'Delete File',
-            data: { confirm: "Are you sure?" },
-            class: 'button' do %>
-            <%= icon('far', 'trash-alt') %>
+          <%= button_to page_file_path(@page.url), method: :delete, title: "Delete File", class: "button",
+                form: { data: { turbo_confirm: "Are you sure?" } } do %>
+            <%= icon("far", "trash-alt") %>
           <% end %>
         </div>
       <% end %>
     </div>
   </div>
-  <progress id="file-upload-progress" value="0"></progress>
 </div>

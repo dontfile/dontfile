@@ -6,3 +6,14 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  Exclude:
+    # Migrations from the Rails 5 and 6 era keep their original style.
+    - "db/migrate/2018*"
+    - "db/migrate/2019*"
+    - "db/migrate/2020*"

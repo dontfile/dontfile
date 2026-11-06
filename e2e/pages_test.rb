@@ -56,11 +56,12 @@ class PagesTest < E2ETest
     assert_no_link "Download File"
   end
 
-  def test_files_bigger_than_100mb_are_refused
+  def test_files_bigger_than_the_limit_are_refused
     path = unique_path
-    big_file = File.join(Dir.tmpdir, "#{path}.bin")
-    File.open(big_file, "wb") { |f| f.truncate(101 * 1000 * 1000) }
     visit "/#{path}"
+    big_file = File.join(Dir.tmpdir, "#{path}.bin")
+    # A sparse file: it takes no disk space, and the browser refuses it before the upload.
+    File.open(big_file, "wb") { |f| f.truncate(max_file_size_shown_on_the_page + 1) }
 
     message = accept_alert { attach_file big_file }
 
@@ -82,8 +83,8 @@ class PagesTest < E2ETest
     response = http_get("/#{path}.zip")
 
     assert_equal "application/zip", response["content-type"]
-    entries = Zip::File.open_buffer(response.body).to_h { |entry| [entry.name, entry.get_input_stream.read] }
-    assert_equal ["#{path}.txt", "dontfile.png"], entries.keys
+    entries = Zip::File.open_buffer(response.body).to_h { |entry| [ entry.name, entry.get_input_stream.read ] }
+    assert_equal [ "#{path}.txt", "dontfile.png" ], entries.keys
     assert_equal "Zipped text", entries["#{path}.txt"]
     assert_equal File.binread(FIXTURE), entries["dontfile.png"].b
   end

@@ -10,6 +10,8 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
 
-    # Add more helper methods to be used by all tests here...
+    def file_bigger_than_the_limit
+      StringIO.new("x" * (Page.max_file_size + 1))
+    end
   end
 end

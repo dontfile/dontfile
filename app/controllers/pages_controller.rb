@@ -1,67 +1,46 @@
-# frozen_string_literal: true
-
 class PagesController < ApplicationController
-  before_action :set_page
+  include PageScoped
 
-  def index; end
+  skip_before_action :set_page, only: :index
+
+  def index
+    redirect_to page_path(params[:url]) if params[:url].present?
+  end
 
   def show
     respond_to do |format|
-      format.zip { download_zip_file }
-      format.any(:html, :json) { render 'show' }
+      format.html
+      format.json
+      format.zip { send_data zip_file, filename: "#{@page.url}.zip", type: :zip }
     end
   end
 
   def update
     respond_to do |format|
-      if @page.update(update_page_params)
-        format.any(:html, :json) { render 'show' }
+      if @page.update(page_params)
+        format.html { head :no_content }
+        format.json { render :show }
       else
-        format.html { render 'show', status: :not_acceptable }
-        format.json { render json: @page.errors, status: :not_acceptable }
+        format.html { head :unprocessable_content }
+        format.json { render json: @page.errors, status: :unprocessable_content }
       end
-    end
-  end
-
-  def delete_file
-    respond_to do |format|
-      @page.file.purge
-
-      format.html { redirect_back(fallback_location: 'show') }
-      format.json { render 'show' }
     end
   end
 
   private
-
-  def set_page
-    @page = Page.find_or_create_by(url_param)
-  end
-
-  def update_page_params
-    params.require(:page).permit(:content, :url, :file)
-  end
-
-  def create_page_params
-    params.permit(:content, :url, :file)
-  end
-
-  def url_param
-    params.permit(:url)
-  end
-
-  def download_zip_file
-    zip_filename = "tmp/#{@page.url}.zip"
-
-    Zip::File.open(zip_filename, Zip::File::CREATE) do |zipfile|
-      zipfile.get_output_stream("#{@page.url}.txt") { |f| f.write @page.content }
-
-      if @page.file.attached?
-        filepath = ActiveStorage::Blob.service.path_for @page.file.key
-        zipfile.add(@page.file.filename.to_s, filepath)
-      end
+    def page_params
+      params.expect(page: [ :content ])
     end
 
-    send_file zip_filename
-  end
+    def zip_file
+      Zip::OutputStream.write_buffer do |zip|
+        zip.put_next_entry("#{@page.url}.txt")
+        zip.write(@page.content.to_s)
+
+        if @page.file.attached?
+          zip.put_next_entry(@page.file.filename.to_s)
+          @page.file.download { |chunk| zip.write(chunk) }
+        end
+      end.string
+    end
 end

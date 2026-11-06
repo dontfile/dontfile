@@ -1,0 +1,7 @@
+shared:
+  # The size limit for the file on a page, in bytes.
+  max_file_size: <%= 100.megabytes %>
+
+test:
+  # A small limit lets tests exceed it with small files.
+  max_file_size: <%= 16.kilobytes %>

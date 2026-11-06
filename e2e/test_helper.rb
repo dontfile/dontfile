@@ -19,7 +19,7 @@ Capybara.run_server = false
 Capybara.app_host = BASE_URL
 Capybara.default_max_wait_time = 5
 Capybara.register_driver(:cuprite) do |app|
-  Capybara::Cuprite::Driver.new(app, window_size: [1400, 1400], headless: ENV["HEADFUL"].nil?)
+  Capybara::Cuprite::Driver.new(app, window_size: [ 1400, 1400 ], headless: ENV["HEADFUL"].nil?)
 end
 Capybara.default_driver = :cuprite
 
@@ -43,6 +43,13 @@ class E2ETest < Minitest::Test
 
   def text_area
     find_field(type: "textarea")
+  end
+
+  UNITS = { "B" => 1, "KB" => 1024, "MB" => 1024**2, "GB" => 1024**3 }.freeze
+
+  def max_file_size_shown_on_the_page
+    number, unit = find("h4", text: "Max size").text.match(/Max size: ([\d.]+) ?([KMG]?B)/i).captures
+    (number.to_f * UNITS.fetch(unit.upcase)).ceil
   end
 
   def type_text(text)
