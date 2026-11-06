@@ -39,7 +39,7 @@ class PageTest < ActiveSupport::TestCase
 
     error = assert_raises(ActiveRecord::RecordInvalid) { @page.save! }
 
-    assert_equal "Validation failed: File is too big. Max size is 16 KB.", error.message
+    assert_equal "Validation failed: File is too big", error.message
     assert_not @page.file.attached?
   end
 end
