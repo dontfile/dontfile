@@ -81,7 +81,7 @@ jobs:
           RAILS_ENV: test
         run: bin/rails db:test:prepare test
 
-  e2e:
+  system-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -93,21 +93,15 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Install e2e gems
-        run: bundle install
-        working-directory: e2e
+      - name: Run System Tests
         env:
-          BUNDLE_GEMFILE: ${{ github.workspace }}/e2e/Gemfile
+          RAILS_ENV: test
+        run: bin/rails db:test:prepare test:system
 
-      - name: Start the server
-        run: |
-          bin/rails db:prepare
-          bin/rails server -p 3000 -d
-          timeout 30 sh -c 'until curl -s -o /dev/null localhost:3000; do sleep 1; done'
-
-      - name: Run e2e tests
-        run: bundle exec ruby pages_test.rb
-        working-directory: e2e
-        env:
-          BUNDLE_GEMFILE: ${{ github.workspace }}/e2e/Gemfile
-          BASE_URL: http://localhost:3000
+      - name: Keep screenshots from failed system tests
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: screenshots
+          path: ${{ github.workspace }}/tmp/screenshots
+          if-no-files-found: ignore
