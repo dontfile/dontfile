@@ -7,7 +7,7 @@
   <%= form_with model: @page, url: page_path(@page.url), method: :patch, id: "text-area",
         data: { controller: "autosave", action: "input->autosave#queue turbo:submit-end->autosave#saved turbo:before-morph-element->autosave#preserveTyping" } do |form| %>
     <h2><%= form.label :content, "Text" %></h2>
-    <%= form.text_area :content, id: "text", data: { autosave_target: "text" } %>
+    <%= form.text_area :content, data: { autosave_target: "text" } %>
   <% end %>
 
   <h2><label for="file">File</label></h2>
